@@ -35,7 +35,7 @@ func init() {
 }
 
 func validateMsg(message string, w http.ResponseWriter) {
-	//log.Printf("Message '%s'", message)
+	log.Printf("Message '%s'", message)
 	splitMsg := strings.Split(message, "\r\n")
 	joinedMsg := strings.Join(splitMsg, "")
 	//log.Printf("Joined msg: %#v", joinedMsg)
