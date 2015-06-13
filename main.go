@@ -21,10 +21,18 @@ const (
 
 var templates *template.Template
 
+var validator *validation.MsgValidator
+
 func init() {
 	templates = template.Must(template.ParseGlob(
 		TPL_DIR + string(os.PathSeparator) + "*",
 	))
+
+	var err error
+	validator, err = validation.GetMsgValidator("14B", "testdata/d14b")
+	if err != nil {
+		panic(fmt.Sprintf("Unable to create validator: %s", err))
+	}
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -42,18 +50,13 @@ func index(w http.ResponseWriter, r *http.Request) {
 			log.Printf("Error executing template: %s", err)
 		}
 	} else {
-		validator, err := validation.GetMsgValidator("14B", "testdata/d14b")
-		if err != nil {
-			fmt.Fprintf(w, "Unable to create validator: %s", err)
-			return
-		}
 
 		splitMsg := strings.Split(message, "\r\n")
 		joinedMsg := strings.Join(splitMsg, "")
 		log.Printf("Joined msg: %#v", joinedMsg)
 		var rawMsg *rawmsg.RawMsg
 		rawMsgParser := rawmsg.NewParser()
-		rawMsg, err = rawMsgParser.ParseRawMsg(joinedMsg)
+		rawMsg, err := rawMsgParser.ParseRawMsg(joinedMsg)
 		if err != nil {
 			fmt.Fprintf(w, "Parsing raw message failed: %s", err)
 			return
