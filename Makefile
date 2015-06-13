@@ -24,6 +24,7 @@ get-deps:
 	go get -t ./...
 
 get-test-deps:
+	go get golang.org/x/tools/cmd/vet
 	go get -u golang.org/x/tools/cmd/cover
 	go get -u github.com/fzipp/gocyclo
 	go get -u github.com/barakmich/go-nyet
