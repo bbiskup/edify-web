@@ -35,6 +35,29 @@ func init() {
 	}
 }
 
+func validateMsg(message string, w http.ResponseWriter) {
+	//log.Printf("Message '%s'", message)
+
+	splitMsg := strings.Split(message, "\r\n")
+	joinedMsg := strings.Join(splitMsg, "")
+	log.Printf("Joined msg: %#v", joinedMsg)
+	var rawMsg *rawmsg.RawMsg
+	rawMsgParser := rawmsg.NewParser()
+	rawMsg, err := rawMsgParser.ParseRawMsg(joinedMsg)
+	if err != nil {
+		fmt.Fprintf(w, "Parsing raw message failed: %s", err)
+		return
+	}
+
+	nestedMsg, err := validator.Validate(rawMsg)
+	if err != nil {
+		fmt.Fprintf(w, "Message validation failed: %s", err)
+		return
+	}
+
+	fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
+}
+
 func index(w http.ResponseWriter, r *http.Request) {
 	log.Printf("r: %s", r.Method)
 	if r.Method == "GET" {
@@ -46,26 +69,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		//log.Printf("Form: %s", r.Form)
 		message := r.FormValue("message")
-		//log.Printf("Message '%s'", message)
+		validateMsg(message, w)
 
-		splitMsg := strings.Split(message, "\r\n")
-		joinedMsg := strings.Join(splitMsg, "")
-		log.Printf("Joined msg: %#v", joinedMsg)
-		var rawMsg *rawmsg.RawMsg
-		rawMsgParser := rawmsg.NewParser()
-		rawMsg, err := rawMsgParser.ParseRawMsg(joinedMsg)
-		if err != nil {
-			fmt.Fprintf(w, "Parsing raw message failed: %s", err)
-			return
-		}
-
-		nestedMsg, err := validator.Validate(rawMsg)
-		if err != nil {
-			fmt.Fprintf(w, "Message validation failed: %s", err)
-			return
-		}
-
-		fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
 	} else {
 		panic(fmt.Sprintf("Unsupported method %s", r.Method))
 	}
