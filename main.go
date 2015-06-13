@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 const (
@@ -32,9 +33,9 @@ func index(w http.ResponseWriter, r *http.Request) {
 		panic("Unsupported request method")
 	}
 	r.ParseForm()
-	log.Printf("Form: %s", r.Form)
+	//log.Printf("Form: %s", r.Form)
 	message := r.FormValue("message")
-	log.Printf("Message '%s'", message)
+	//log.Printf("Message '%s'", message)
 	if len(message) == 0 {
 		err := templates.ExecuteTemplate(w, "layout", nil)
 		if err != nil {
@@ -47,9 +48,12 @@ func index(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		splitMsg := strings.Split(message, "\r\n")
+		joinedMsg := strings.Join(splitMsg, "")
+		log.Printf("Joined msg: %#v", joinedMsg)
 		var rawMsg *rawmsg.RawMsg
 		rawMsgParser := rawmsg.NewParser()
-		rawMsg, err = rawMsgParser.ParseRawMsg(message)
+		rawMsg, err = rawMsgParser.ParseRawMsg(joinedMsg)
 		if err != nil {
 			fmt.Fprintf(w, "Parsing raw message failed: %s", err)
 			return
