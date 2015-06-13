@@ -1,0 +1,27 @@
+{
+  "name": "edify-web",
+  "version": "0.0.0",
+  "homepage": "https://github.com/bbiskup/edify-web",
+  "authors": [
+    "Bernhard Biskup <bbiskup@gmx.de>"
+  ],
+  "description": "Simple web frontend for edify EDIFACT toolkit",
+  "main": "main.go",
+  "private": "true",
+  "keywords": [
+    "edify",
+    "EDIFACT",
+    "golang"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}

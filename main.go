@@ -9,6 +9,7 @@ import (
 
 const (
 	STATIC_DIR = "static"
+	BOWER_DIR  = "bower_components"
 	//  TPL_DIR    = strings.Join([]string{STATIC_DIR, "templates"}, string(os.PathSeparator))
 
 	TPL_DIR = STATIC_DIR + string(os.PathSeparator) + "templates"
@@ -31,8 +32,11 @@ func index(w http.ResponseWriter, request *http.Request) {
 
 func main() {
 	mux := http.NewServeMux()
-	files := http.FileServer(http.Dir(STATIC_DIR))
-	mux.Handle("/static/", http.StripPrefix("/static/", files))
+	static := http.FileServer(http.Dir(STATIC_DIR))
+	bower := http.FileServer(http.Dir(BOWER_DIR))
+
+	mux.Handle("/static/edify/", http.StripPrefix("/static/edify/", static))
+	mux.Handle("/static/bower/", http.StripPrefix("/static/bower/", bower))
 	mux.HandleFunc("/", index)
 
 	server := &http.Server{
