@@ -20,7 +20,6 @@ const (
 )
 
 var templates *template.Template
-
 var validator *validation.MsgValidator
 
 func init() {
@@ -37,10 +36,9 @@ func init() {
 
 func validateMsg(message string, w http.ResponseWriter) {
 	//log.Printf("Message '%s'", message)
-
 	splitMsg := strings.Split(message, "\r\n")
 	joinedMsg := strings.Join(splitMsg, "")
-	log.Printf("Joined msg: %#v", joinedMsg)
+	//log.Printf("Joined msg: %#v", joinedMsg)
 	var rawMsg *rawmsg.RawMsg
 	rawMsgParser := rawmsg.NewParser()
 	rawMsg, err := rawMsgParser.ParseRawMsg(joinedMsg)
