@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"github.com/bbiskup/edify/edifact/rawmsg"
+	"github.com/bbiskup/edify/edifact/validation"
 	"html/template"
 	"log"
 	"net/http"
@@ -23,10 +26,42 @@ func init() {
 	))
 }
 
-func index(w http.ResponseWriter, request *http.Request) {
-	err := templates.ExecuteTemplate(w, "layout", nil)
-	if err != nil {
-		log.Printf("Error executing template: %s", err)
+func index(w http.ResponseWriter, r *http.Request) {
+	log.Printf("r: %s", r.Method)
+	if r.Method != "GET" {
+		panic("Unsupported request method")
+	}
+	r.ParseForm()
+	log.Printf("Form: %s", r.Form)
+	message := r.FormValue("message")
+	log.Printf("Message '%s'", message)
+	if len(message) == 0 {
+		err := templates.ExecuteTemplate(w, "layout", nil)
+		if err != nil {
+			log.Printf("Error executing template: %s", err)
+		}
+	} else {
+		validator, err := validation.GetMsgValidator("14B", "testdata/d14b")
+		if err != nil {
+			fmt.Fprintf(w, "Unable to create validator: %s", err)
+			return
+		}
+
+		var rawMsg *rawmsg.RawMsg
+		rawMsgParser := rawmsg.NewParser()
+		rawMsg, err = rawMsgParser.ParseRawMsg(message)
+		if err != nil {
+			fmt.Fprintf(w, "Parsing raw message failed: %s", err)
+			return
+		}
+
+		nestedMsg, err := validator.Validate(rawMsg)
+		if err != nil {
+			fmt.Fprintf(w, "Message validation failed: %s", err)
+			return
+		}
+
+		fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
 	}
 }
 
