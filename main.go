@@ -37,19 +37,16 @@ func init() {
 
 func index(w http.ResponseWriter, r *http.Request) {
 	log.Printf("r: %s", r.Method)
-	if r.Method != "GET" {
-		panic("Unsupported request method")
-	}
-	r.ParseForm()
-	//log.Printf("Form: %s", r.Form)
-	message := r.FormValue("message")
-	//log.Printf("Message '%s'", message)
-	if len(message) == 0 {
+	if r.Method == "GET" {
 		err := templates.ExecuteTemplate(w, "layout", nil)
 		if err != nil {
 			log.Printf("Error executing template: %s", err)
 		}
-	} else {
+	} else if r.Method == "POST" {
+		r.ParseForm()
+		//log.Printf("Form: %s", r.Form)
+		message := r.FormValue("message")
+		//log.Printf("Message '%s'", message)
 
 		splitMsg := strings.Split(message, "\r\n")
 		joinedMsg := strings.Join(splitMsg, "")
@@ -69,6 +66,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 		}
 
 		fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
+	} else {
+		panic(fmt.Sprintf("Unsupported method %s", r.Method))
 	}
 }
 
