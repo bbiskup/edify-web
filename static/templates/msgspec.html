@@ -36,7 +36,8 @@
 <thead>
 <tr>
             <td>ID</td>
-            <td>mandatory?</td>
+            <td>Group?</td>
+            <td>Mandatory?</td>
             <td>Max. Count</td>
         </tr>
 </thead>
@@ -44,6 +45,7 @@
         {{ range .msgSpec.TopLevelGrp.Children}}
         <tr>
             <td>{{.Id}}</td>
+            <td>{{.IsGroup}}</td>
             <td>{{.IsMandatory}}</td>
             <td>{{.MaxCount}}</td>
         </tr>
