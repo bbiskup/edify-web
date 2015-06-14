@@ -1,0 +1,12 @@
+{{ define "content"}}
+<h2>{{.msgSpec.Id}}</h2>
+<h3>{{.msgSpec.Name}}</h3>
+<table class="table">
+<tbody>
+<tr><td>Version:</td><td>{{.msgSpec.Version}}</td></tr>
+<tr><td>Release:</td><td>{{.msgSpec.Release}}</td></tr>
+<tr><td>Contr. Agency:</td><td>{{.msgSpec.ContrAgency}}</td></tr>
+<tr><td>Revision:</td><td>{{.msgSpec.Revision}}</td></tr>
+<tr><td>Date:</td><td>{{.msgSpec.Date}}</td></tr>
+<tr><td>Source:</td><td>{{.msgSpec.Source}}</td></tr>
+{{end}}

@@ -21,6 +21,9 @@ func main() {
 	r.HandleFunc("/about/", handlers.About).
 		Name("about").
 		Methods("GET")
+	r.HandleFunc("/specs/message/{id}", handlers.MsgSpec).
+		Name("about").
+		Methods("GET")
 	r.PathPrefix("/static/edify/").
 		Name("edifystatic").
 		Handler(http.StripPrefix("/static/edify/", static))
