@@ -33,7 +33,7 @@
 </thead>
 <tbody>
 {{ range .msgSpecs}}
-<tr><td>{{.Id}}</td><td>{{.Name}}</td></tr>
+<tr><td><a href="{{.|msgSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
 {{end}}
 </tbody>
 </table>

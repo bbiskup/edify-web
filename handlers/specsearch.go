@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/bbiskup/edify-web/defs"
 	msp "github.com/bbiskup/edify/edifact/spec/message"
 	"html/template"
@@ -13,9 +14,15 @@ import (
 var specSearchTemplates *template.Template
 
 func init() {
-	specSearchTemplates = template.Must(template.ParseFiles(
+	funcMap := template.FuncMap{"msgSpecURL": msgSpecURL}
+	t := template.New("layout.html").Funcs(funcMap)
+	specSearchTemplates = template.Must(t.ParseFiles(
 		defs.TemplatePaths("layout.html", "navbar.html", "specsearch.html")...,
 	))
+}
+
+func msgSpecURL(msgSpec *msp.MsgSpec) string {
+	return fmt.Sprintf("/specs/message/%s", msgSpec.Id)
 }
 
 // Search term in message specifications
