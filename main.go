@@ -17,6 +17,8 @@ const (
 	//  TPL_DIR    = strings.Join([]string{STATIC_DIR, "templates"}, string(os.PathSeparator))
 
 	TPL_DIR = STATIC_DIR + string(os.PathSeparator) + "templates"
+
+	SPEC_DIR = ".edify/downloads/d14b"
 )
 
 var indexTemplates *template.Template
@@ -37,7 +39,7 @@ func init() {
 	))
 
 	var err error
-	validator, err = validation.GetMsgValidator("14B", "testdata/d14b")
+	validator, err = validation.GetMsgValidator("14B", SPEC_DIR)
 	if err != nil {
 		panic(fmt.Sprintf("Unable to create validator: %s", err))
 	}

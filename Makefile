@@ -65,3 +65,7 @@ clean:
 
 test-curl-1:
 	curl -X POST --data-urlencode "message@testdata/messages/INVOIC_1.txt" http://localhost:8001/
+
+get-edifact-specs:
+	edify download_specs
+	edify extract_specs
