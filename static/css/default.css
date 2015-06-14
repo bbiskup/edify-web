@@ -1,3 +1,6 @@
 .edifact-text {
     font-family: monospace;
 }
+td.td-max-count {
+    text-align: right;
+}

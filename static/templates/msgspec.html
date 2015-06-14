@@ -35,10 +35,10 @@
 <table class="table">
 <thead>
 <tr>
-            <td>ID</td>
-            <td>Group?</td>
-            <td>Mandatory?</td>
-            <td>Max. Count</td>
+            <th>ID</th>
+            <th>Group?</th>
+            <th>Mandatory?</th>
+            <th>Max. Count</th>
         </tr>
 </thead>
     <tbody>
@@ -47,7 +47,7 @@
             <td>{{.Id}}</td>
             <td>{{.IsGroup}}</td>
             <td>{{.IsMandatory}}</td>
-            <td>{{.MaxCount}}</td>
+            <td class="td-max-count">{{.MaxCount}}</td>
         </tr>
         {{end}}
     </tbody>
