@@ -1,6 +1,6 @@
 {{ define "content"}}
 <h1>Search specification</h1>
-<form method="GET" class="form-horizontal">
+<form method="GET" class="form-horizontal" action="/specsearch/">
     <div class="form-group">
         <label class="col-xs-3 control-label" for="specversion">Search term</label>
         <div class="col-xs-5">
@@ -23,4 +23,13 @@
         </div>
     </div>
 </form>
+<hr>
+<h2>Search results</h2> 
+{{ if .msgSpecs}} Found {{ .msgSpecs|len}} message specs {{ else }} {{ end }} 
+<ul>
+{{ range .msgSpecs}}
+<li>{{.Id}} {{.Name}}</li>
+{{end}}
+</ul>
+
 {{ end }}

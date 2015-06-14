@@ -2,11 +2,10 @@ package defs
 
 import (
 	"fmt"
+	"github.com/bbiskup/edify/edifact/spec/specparser"
 	"github.com/bbiskup/edify/edifact/validation"
 	"os"
 )
-
-var Validator *validation.MsgValidator
 
 const (
 	STATIC_DIR = "static"
@@ -18,9 +17,12 @@ const (
 	SPEC_DIR = ".edify/downloads/d14b"
 )
 
+var SpecParser *specparser.FullSpecParser
+var Validator *validation.MsgValidator
+
 func init() {
 	var err error
-	Validator, err = validation.GetMsgValidator("14B", SPEC_DIR)
+	Validator, SpecParser, err = validation.GetMsgValidator("14B", SPEC_DIR)
 	if err != nil {
 		panic(fmt.Sprintf("Unable to create validator: %s", err))
 	}
