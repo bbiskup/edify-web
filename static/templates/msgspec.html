@@ -1,12 +1,42 @@
 {{ define "content"}}
 <h2>{{.msgSpec.Id}}</h2>
 <h3>{{.msgSpec.Name}}</h3>
+<h4>Metadata</h4>
+<table class="table">
+    <tbody>
+        <tr>
+            <td>Version:</td>
+            <td>{{.msgSpec.Version}}</td>
+        </tr>
+        <tr>
+            <td>Release:</td>
+            <td>{{.msgSpec.Release}}</td>
+        </tr>
+        <tr>
+            <td>Contr. Agency:</td>
+            <td>{{.msgSpec.ContrAgency}}</td>
+        </tr>
+        <tr>
+            <td>Revision:</td>
+            <td>{{.msgSpec.Revision}}</td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td>{{.msgSpec.Date}}</td>
+        </tr>
+        <tr>
+            <td>Source:</td>
+            <td>{{.msgSpec.Source}}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h4>Segments</h4>
 <table class="table">
 <tbody>
-<tr><td>Version:</td><td>{{.msgSpec.Version}}</td></tr>
-<tr><td>Release:</td><td>{{.msgSpec.Release}}</td></tr>
-<tr><td>Contr. Agency:</td><td>{{.msgSpec.ContrAgency}}</td></tr>
-<tr><td>Revision:</td><td>{{.msgSpec.Revision}}</td></tr>
-<tr><td>Date:</td><td>{{.msgSpec.Date}}</td></tr>
-<tr><td>Source:</td><td>{{.msgSpec.Source}}</td></tr>
+    {{ range .msgSpec.TopLevelGrp.Children}}
+    <tr><td>{{.Id}}</td></tr>
+    {{end}}
+</tbody>
+</table>
 {{end}}
