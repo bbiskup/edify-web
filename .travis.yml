@@ -29,5 +29,6 @@ script:
   - make bench 2> bench.log
   - make cover
   - ./edify-web &
+  - sleep 5  # Allow for initialization
   - make test-curl-1
 
