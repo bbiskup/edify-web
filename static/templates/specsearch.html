@@ -39,4 +39,18 @@
 </tbody>
 </table>
 
+<h3>Segment specs</h3> 
+{{ if .segSpecs|len}} Found {{ .segSpecs|len}} message specs {{ else }} {{ end }} 
+<table class="table">
+<thead>
+    <th>ID</th>
+    <th>Name</th>
+</thead>
+<tbody>
+{{ range .segSpecs}}
+<tr><td><a href="{{.|segSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
+{{end}}
+</tbody>
+</table>
+
 {{ end }}

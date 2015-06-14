@@ -22,7 +22,10 @@ func main() {
 		Name("about").
 		Methods("GET")
 	r.HandleFunc("/specs/message/{id}", handlers.MsgSpec).
-		Name("about").
+		Name("msgspec").
+		Methods("GET")
+	r.HandleFunc("/specs/segment/{id}", handlers.SegSpec).
+		Name("segspec").
 		Methods("GET")
 	r.PathPrefix("/static/edify/").
 		Name("edifystatic").

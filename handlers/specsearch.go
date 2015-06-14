@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/bbiskup/edify-web/defs"
 	msp "github.com/bbiskup/edify/edifact/spec/message"
+	ssp "github.com/bbiskup/edify/edifact/spec/segment"
 	"html/template"
 	"log"
 	"net/http"
@@ -14,7 +15,10 @@ import (
 var specSearchTemplates *template.Template
 
 func init() {
-	funcMap := template.FuncMap{"msgSpecURL": msgSpecURL}
+	funcMap := template.FuncMap{
+		"msgSpecURL": msgSpecURL,
+		"segSpecURL": segSpecURL,
+	}
 	t := template.New("layout.html").Funcs(funcMap)
 	specSearchTemplates = template.Must(t.ParseFiles(
 		defs.TemplatePaths("layout.html", "navbar.html", "specsearch.html")...,
@@ -23,6 +27,10 @@ func init() {
 
 func msgSpecURL(msgSpec *msp.MsgSpec) string {
 	return fmt.Sprintf("/specs/message/%s", msgSpec.Id)
+}
+
+func segSpecURL(segSpec *ssp.SegSpec) string {
+	return fmt.Sprintf("/specs/segment/%s", segSpec.Id)
 }
 
 // Search term in message specifications
@@ -37,14 +45,27 @@ func searchMsgSpecs(w http.ResponseWriter, searchTerm string) []*msp.MsgSpec {
 	return result
 }
 
+// Search term in segment specifications
+func searchSegSpecs(w http.ResponseWriter, searchTerm string) []*ssp.SegSpec {
+	result := ssp.SegSpecs{}
+	for _, segID := range defs.Validator.SegSpecs.Ids() {
+		segSpec := defs.Validator.SegSpecs.Get(segID)
+		if strings.Contains(strings.ToLower(segID), searchTerm) || strings.Contains(strings.ToLower(segSpec.Name), searchTerm) {
+			result = append(result, segSpec)
+		}
+	}
+	sort.Sort(result)
+	return result
+}
+
 func SpecSearch(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 	searchTerm := strings.ToLower(r.FormValue("searchterm"))
 	data := map[string]interface{}{}
-	msgSpecs := searchMsgSpecs(w, searchTerm)
-	log.Printf("Found %d message specs for search term %s", len(msgSpecs), searchTerm)
-	data["msgSpecs"] = msgSpecs
+	//log.Printf("Found %d message specs for search term %s", len(msgSpecs), searchTerm)
+	data["msgSpecs"] = searchMsgSpecs(w, searchTerm)
+	data["segSpecs"] = searchSegSpecs(w, searchTerm)
 	data["searchTerm"] = searchTerm
 
 	err := specSearchTemplates.ExecuteTemplate(w, "layout", data)
