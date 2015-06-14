@@ -14,10 +14,10 @@ install:
 script:
   - go clean
   - echo $GOPATH
-  - (cd $GOPATH && git clone https://github.com/bbiskup/edify.git)
-  - # Bleeding edge
-  - (cd $GOPATH/edify && git checkout dev && go install)
   - make get-deps
+  - (cd $GOPATH/src/github.com/bbiskup && git clone https://github.com/bbiskup/edify.git)
+  - # Bleeding edge
+  - (cd $GOPATH/src/github.com/bbiskup/edify && git checkout dev && go install)
   - make get-test-deps
   - make get-edifact-specs
   - go vet
