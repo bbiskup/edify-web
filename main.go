@@ -12,11 +12,15 @@ func main() {
 	static := http.FileServer(http.Dir(defs.STATIC_DIR))
 	bower := http.FileServer(http.Dir(defs.BOWER_DIR))
 
-	r.HandleFunc("/", handlers.Index)
-	r.HandleFunc("/about/", handlers.About)
-
-	r.PathPrefix("/static/edify/").Handler(http.StripPrefix("/static/edify/", static))
-	r.PathPrefix("/static/bower/").Handler(http.StripPrefix("/static/bower/", bower))
+	r.HandleFunc("/", handlers.Index).
+		Methods("GET", "POST")
+	r.HandleFunc("/about/", handlers.About).
+		Methods("GET").
+		Schemes("http")
+	r.PathPrefix("/static/edify/").
+		Handler(http.StripPrefix("/static/edify/", static))
+	r.PathPrefix("/static/bower/").
+		Handler(http.StripPrefix("/static/bower/", bower))
 
 	server := &http.Server{
 		Addr:    "0.0.0.0:8001",
