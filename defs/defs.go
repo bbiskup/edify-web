@@ -1,8 +1,12 @@
 package defs
 
 import (
+	"fmt"
+	"github.com/bbiskup/edify/edifact/validation"
 	"os"
 )
+
+var Validator *validation.MsgValidator
 
 const (
 	STATIC_DIR = "static"
@@ -13,6 +17,14 @@ const (
 
 	SPEC_DIR = ".edify/downloads/d14b"
 )
+
+func init() {
+	var err error
+	Validator, err = validation.GetMsgValidator("14B", SPEC_DIR)
+	if err != nil {
+		panic(fmt.Sprintf("Unable to create validator: %s", err))
+	}
+}
 
 func TemplatePaths(templateNames ...string) []string {
 	result := make([]string, 0, len(templateNames))

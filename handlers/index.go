@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/bbiskup/edify-web/defs"
 	"github.com/bbiskup/edify/edifact/rawmsg"
-	"github.com/bbiskup/edify/edifact/validation"
 	"html/template"
 	"log"
 	"net/http"
@@ -12,18 +11,12 @@ import (
 )
 
 var indexTemplates *template.Template
-var validator *validation.MsgValidator
 
 func init() {
 	indexTemplates = template.Must(template.ParseFiles(
 		defs.TemplatePaths("layout.html", "navbar.html", "content.html")...,
 	))
 
-	var err error
-	validator, err = validation.GetMsgValidator("14B", defs.SPEC_DIR)
-	if err != nil {
-		panic(fmt.Sprintf("Unable to create validator: %s", err))
-	}
 }
 
 func validateMsg(message string, w http.ResponseWriter) {
@@ -39,7 +32,7 @@ func validateMsg(message string, w http.ResponseWriter) {
 		return
 	}
 
-	nestedMsg, err := validator.Validate(rawMsg)
+	nestedMsg, err := defs.Validator.Validate(rawMsg)
 	if err != nil {
 		fmt.Fprintf(w, "Message validation failed: %s", err)
 		return
