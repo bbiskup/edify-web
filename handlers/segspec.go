@@ -11,7 +11,7 @@ import (
 var segSpecTemplates *template.Template
 
 func init() {
-	funcMap := template.FuncMap{"msgSpecURL": msgSpecURL}
+	funcMap := template.FuncMap{"MsgSpecURL": defs.MsgSpecURL}
 	t := template.New("layout.html").Funcs(funcMap)
 	segSpecTemplates = template.Must(t.ParseFiles(
 		defs.TemplatePaths("layout.html", "navbar.html", "segspec.html")...,

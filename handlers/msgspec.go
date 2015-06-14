@@ -11,7 +11,10 @@ import (
 var msgSpecTemplates *template.Template
 
 func init() {
-	funcMap := template.FuncMap{"msgSpecURL": msgSpecURL}
+	funcMap := template.FuncMap{
+		"MsgSpecURL":     defs.MsgSpecURL,
+		"MsgSpecPartURL": defs.MsgSpecPartURL,
+	}
 	t := template.New("layout.html").Funcs(funcMap)
 	msgSpecTemplates = template.Must(t.ParseFiles(
 		defs.TemplatePaths("layout.html", "navbar.html", "msgspec.html")...,

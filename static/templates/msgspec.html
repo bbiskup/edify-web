@@ -44,7 +44,7 @@
     <tbody>
         {{ range .msgSpec.TopLevelGrp.Children}}
         <tr>
-            <td>{{.Id}}</td>
+            <td><a href="{{.|MsgSpecPartURL}}">{{.Id}}</a></td>
             <td>{{.IsGroup}}</td>
             <td>{{.IsMandatory}}</td>
             <td class="td-max-count">{{.MaxCount}}</td>
