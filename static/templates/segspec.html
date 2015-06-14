@@ -1,5 +1,37 @@
 {{ define "content"}}
-<h2>Segment {{.segSpec.Id}}<h2>
-<h3>{{.segSpec.Name}}</h3>
-Function: {{.segSpec.Function}}
+<h2>Segment {{.segSpec.Id}}</h2>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Name:</th>
+            <td>{{.segSpec.Name}}</td>
+        </tr>
+        <tr>
+            <th>Function:</th>
+            <td>{{.segSpec.Function}}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h3>Data elements</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mandatory?</th>
+            <th>Max. count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .segSpec.SegDataElemSpecs}}
+        <tr>
+            <td>{{.DataElemSpec.Id}}</td>
+            <td>{{.DataElemSpec.Name}}</td>
+            <td>{{.IsMandatory}}</td>
+            <td>{{.Count}}</td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
 {{end}}
