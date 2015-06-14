@@ -4,6 +4,7 @@ import (
 	"github.com/bbiskup/edify-web/defs"
 	"github.com/bbiskup/edify-web/handlers"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 )
 
@@ -15,6 +16,9 @@ func main() {
 	r.HandleFunc("/", handlers.Index).
 		Name("index").
 		Methods("GET", "POST")
+	r.HandleFunc("/specsearch/", handlers.SpecSearch).
+		Name("specsearch").
+		Methods("GET")
 	r.HandleFunc("/about/", handlers.About).
 		Name("about").
 		Methods("GET")
@@ -24,6 +28,12 @@ func main() {
 	r.PathPrefix("/static/bower/").
 		Name("bowerstatic").
 		Handler(http.StripPrefix("/static/bower/", bower))
+
+	rev, err := r.GetRoute("about").URL()
+	if err != nil {
+		panic(err)
+	}
+	log.Printf("#### reverse: %s", rev)
 
 	server := &http.Server{
 		Addr:    "0.0.0.0:8001",
