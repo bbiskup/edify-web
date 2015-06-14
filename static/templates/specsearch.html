@@ -1,6 +1,26 @@
 {{ define "content"}}
 <h1>Search specification</h1>
-<form method="GET">
-    <input type="submit" value="Submit">
+<form method="GET" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label" for="specversion">Search term</label>
+        <div class="col-xs-5">
+            <input type="text" name="searchterm" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-3 control-label" for="specversion">Spec version</label>
+        <div class="col-xs-5 selectContainer">
+            <select name="specversion" class="form-control">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-5 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
 </form>
 {{ end }}
