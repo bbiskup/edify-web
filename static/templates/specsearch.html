@@ -25,11 +25,17 @@
 </form>
 <hr>
 <h2>Search results</h2> 
-{{ if .msgSpecs}} Found {{ .msgSpecs|len}} message specs {{ else }} {{ end }} 
-<ul>
+{{ if .msgSpecs|len}} Found {{ .msgSpecs|len}} message specs {{ else }} {{ end }} 
+<table class="table">
+<thead>
+    <th>ID</th>
+    <th>Name</th>
+</thead>
+<tbody>
 {{ range .msgSpecs}}
-<li>{{.Id}} {{.Name}}</li>
+<tr><td>{{.Id}}</td><td>{{.Name}}</td></tr>
 {{end}}
-</ul>
+</tbody>
+</table>
 
 {{ end }}

@@ -22,7 +22,7 @@ func init() {
 func searchMsgSpecs(w http.ResponseWriter, searchTerm string) []*msp.MsgSpec {
 	result := msp.MsgSpecs{}
 	for msgId, msgSpec := range defs.Validator.MsgSpecs {
-		if strings.Contains(msgId, searchTerm) || strings.Contains(msgSpec.Name, searchTerm) {
+		if strings.Contains(strings.ToLower(msgId), searchTerm) || strings.Contains(strings.ToLower(msgSpec.Name), searchTerm) {
 			result = append(result, msgSpec)
 		}
 	}
@@ -33,7 +33,7 @@ func searchMsgSpecs(w http.ResponseWriter, searchTerm string) []*msp.MsgSpec {
 func SpecSearch(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
-	searchTerm := r.FormValue("searchterm")
+	searchTerm := strings.ToLower(r.FormValue("searchterm"))
 	data := map[string]interface{}{}
 	if searchTerm != "" {
 		msgSpecs := searchMsgSpecs(w, searchTerm)
