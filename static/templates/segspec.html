@@ -26,7 +26,7 @@
     <tbody>
         {{ range .segSpec.SegDataElemSpecs}}
         <tr>
-            <td>{{.DataElemSpec.Id}}</td>
+            <td><a href="{{.DataElemSpec|DataElemSpecURL}}">{{.DataElemSpec.Id}}</a></td>
             <td>{{.DataElemSpec.Name}}</td>
             <td>{{.IsMandatory}}</td>
             <td>{{.Count}}</td>

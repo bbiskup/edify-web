@@ -2,6 +2,7 @@ package defs
 
 import (
 	"fmt"
+	dsp "github.com/bbiskup/edify/edifact/spec/dataelement"
 	msp "github.com/bbiskup/edify/edifact/spec/message"
 	ssp "github.com/bbiskup/edify/edifact/spec/segment"
 )
@@ -26,4 +27,16 @@ func MsgSpecPartURL(msgSpecPart msp.MsgSpecPart) string {
 	default:
 		panic(fmt.Sprintf("Unsupported type %T", msgSpecPart))
 	}
+}
+
+func DataElemSpecURL(dataElemSpec dsp.DataElemSpec) string {
+	switch dataElemSpec := dataElemSpec.(type) {
+	case *dsp.SimpleDataElemSpec:
+		return fmt.Sprintf("/specs/simpledataelement/%s", dataElemSpec.Id())
+	case *dsp.CompositeDataElemSpec:
+		return fmt.Sprintf("/specs/compositedataelement/%s", dataElemSpec.Id())
+	default:
+		panic(fmt.Sprintf("Unexpected type: %T", dataElemSpec))
+	}
+
 }

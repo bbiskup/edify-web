@@ -27,6 +27,9 @@ func main() {
 	r.HandleFunc("/specs/segment/{id}", handlers.SegSpec).
 		Name("segspec").
 		Methods("GET")
+	r.HandleFunc("/specs/compositedataelement/{id}", handlers.CompositeDataElemSpec).
+		Name("dataelemspec").
+		Methods("GET")
 	r.PathPrefix("/static/edify/").
 		Name("edifystatic").
 		Handler(http.StripPrefix("/static/edify/", static))
