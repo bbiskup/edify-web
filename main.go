@@ -13,13 +13,16 @@ func main() {
 	bower := http.FileServer(http.Dir(defs.BOWER_DIR))
 
 	r.HandleFunc("/", handlers.Index).
+		Name("index").
 		Methods("GET", "POST")
 	r.HandleFunc("/about/", handlers.About).
-		Methods("GET").
-		Schemes("http")
+		Name("about").
+		Methods("GET")
 	r.PathPrefix("/static/edify/").
+		Name("edifystatic").
 		Handler(http.StripPrefix("/static/edify/", static))
 	r.PathPrefix("/static/bower/").
+		Name("bowerstatic").
 		Handler(http.StripPrefix("/static/bower/", bower))
 
 	server := &http.Server{
