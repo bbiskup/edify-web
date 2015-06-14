@@ -19,12 +19,21 @@ const (
 	TPL_DIR = STATIC_DIR + string(os.PathSeparator) + "templates"
 )
 
-var templates *template.Template
+var indexTemplates *template.Template
+var aboutTemplates *template.Template
 var validator *validation.MsgValidator
 
 func init() {
-	templates = template.Must(template.ParseGlob(
-		TPL_DIR + string(os.PathSeparator) + "*",
+	// indexTemplates = template.Must(template.ParseFiles(
+	// 	templatePaths("layout.html", "navbar.html", "content.html")...,
+	// ))
+
+	indexTemplates = template.Must(template.ParseFiles(
+		templatePaths("layout.html", "navbar.html", "content.html")...,
+	))
+
+	aboutTemplates = template.Must(template.ParseFiles(
+		templatePaths("layout.html", "navbar.html", "about.html")...,
 	))
 
 	var err error
@@ -32,6 +41,14 @@ func init() {
 	if err != nil {
 		panic(fmt.Sprintf("Unable to create validator: %s", err))
 	}
+}
+
+func templatePaths(templateNames ...string) []string {
+	result := make([]string, 0, len(templateNames))
+	for _, templateName := range templateNames {
+		result = append(result, TPL_DIR+string(os.PathSeparator)+templateName)
+	}
+	return result
 }
 
 func validateMsg(message string, w http.ResponseWriter) {
@@ -57,9 +74,8 @@ func validateMsg(message string, w http.ResponseWriter) {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	log.Printf("r: %s", r.Method)
 	if r.Method == "GET" {
-		err := templates.ExecuteTemplate(w, "layout", nil)
+		err := indexTemplates.ExecuteTemplate(w, "layout", nil)
 		if err != nil {
 			log.Printf("Error executing template: %s", err)
 		}
@@ -74,6 +90,13 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func about(w http.ResponseWriter, r *http.Request) {
+	err := aboutTemplates.ExecuteTemplate(w, "layout", nil)
+	if err != nil {
+		log.Printf("Error executing template: %s", err)
+	}
+}
+
 func main() {
 	mux := http.NewServeMux()
 	static := http.FileServer(http.Dir(STATIC_DIR))
@@ -82,6 +105,7 @@ func main() {
 	mux.Handle("/static/edify/", http.StripPrefix("/static/edify/", static))
 	mux.Handle("/static/bower/", http.StripPrefix("/static/bower/", bower))
 	mux.HandleFunc("/", index)
+	mux.HandleFunc("/about/", about)
 
 	server := &http.Server{
 		Addr:    "0.0.0.0:8001",
