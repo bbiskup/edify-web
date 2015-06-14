@@ -33,10 +33,21 @@
 <hr>
 <h4>Segments</h4>
 <table class="table">
-<tbody>
-    {{ range .msgSpec.TopLevelGrp.Children}}
-    <tr><td>{{.Id}}</td></tr>
-    {{end}}
-</tbody>
+<thead>
+<tr>
+            <td>ID</td>
+            <td>mandatory?</td>
+            <td>Max. Count</td>
+        </tr>
+</thead>
+    <tbody>
+        {{ range .msgSpec.TopLevelGrp.Children}}
+        <tr>
+            <td>{{.Id}}</td>
+            <td>{{.IsMandatory}}</td>
+            <td>{{.MaxCount}}</td>
+        </tr>
+        {{end}}
+    </tbody>
 </table>
 {{end}}
