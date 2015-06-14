@@ -45,6 +45,7 @@ func SpecSearch(w http.ResponseWriter, r *http.Request) {
 	msgSpecs := searchMsgSpecs(w, searchTerm)
 	log.Printf("Found %d message specs for search term %s", len(msgSpecs), searchTerm)
 	data["msgSpecs"] = msgSpecs
+	data["searchTerm"] = searchTerm
 
 	err := specSearchTemplates.ExecuteTemplate(w, "layout", data)
 	if err != nil {
