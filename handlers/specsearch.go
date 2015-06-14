@@ -42,11 +42,9 @@ func SpecSearch(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	searchTerm := strings.ToLower(r.FormValue("searchterm"))
 	data := map[string]interface{}{}
-	if searchTerm != "" {
-		msgSpecs := searchMsgSpecs(w, searchTerm)
-		log.Printf("Found %d message specs for search term %s", len(msgSpecs), searchTerm)
-		data["msgSpecs"] = msgSpecs
-	}
+	msgSpecs := searchMsgSpecs(w, searchTerm)
+	log.Printf("Found %d message specs for search term %s", len(msgSpecs), searchTerm)
+	data["msgSpecs"] = msgSpecs
 
 	err := specSearchTemplates.ExecuteTemplate(w, "layout", data)
 	if err != nil {
