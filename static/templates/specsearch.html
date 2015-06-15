@@ -24,9 +24,10 @@
     </div>
 </form>
 <hr>
-<h2>Search results</h2> 
-<h3>Message specs</h3> 
-{{ if .msgSpecs|len}} Found {{ .msgSpecs|len}} message specs {{ else }} {{ end }} 
+<h3>Search results</h3>
+
+{{ if .msgSpecs|len}}
+<h4>{{.msgSpecs|len}} message specs</h4> 
 <table class="table">
 <thead>
     <th>ID</th>
@@ -38,9 +39,12 @@
 {{end}}
 </tbody>
 </table>
+{{else}}
+<h4>No message specs</h4>
+{{end}}
 
-<h3>Segment specs</h3> 
-{{ if .segSpecs|len}} Found {{ .segSpecs|len}} segment specs {{ else }} {{ end }} 
+{{ if .segSpecs|len}}
+<h4>{{ .segSpecs|len}} segment specs</h4> 
 <table class="table">
 <thead>
     <th>ID</th>
@@ -52,9 +56,12 @@
 {{end}}
 </tbody>
 </table>
+{{else}}
+<h4>No segment specs</h4>
+{{end}}
 
-<h3>Composite data element specs</h3> 
-{{ if .compositeDataElemSpecs|len}} Found {{ .compositeDataElemSpecs|len}} composite data element specs {{ else }} {{ end }} 
+{{ if .compositeDataElemSpecs|len}}
+<h4>{{ .compositeDataElemSpecs|len}} composite data element specs</h4> 
 <table class="table">
 <thead>
     <th>ID</th>
@@ -66,9 +73,12 @@
 {{end}}
 </tbody>
 </table>
+{{else}}
+<h4>No composite data element specs</h4>
+{{end}}
 
-<h3>Simple data element specs</h3> 
-{{ if .simpleDataElemSpecs|len}} Found {{ .simpleDataElemSpecs|len}} simple data element specs {{ else }} {{ end }} 
+{{ if .simpleDataElemSpecs|len}}
+<h4>{{ .simpleDataElemSpecs|len}} simple data element specs</h4> 
 <table class="table">
 <thead>
     <th>ID</th>
@@ -80,9 +90,12 @@
 {{end}}
 </tbody>
 </table>
+{{else}}
+<h4>No simple data element specs</h4>
+{{end}}
 
-<h3>Codes specs</h3> 
-{{ if .codesSpecs|len}} Found {{ .codesSpecs|len}} codes specs {{ else }} {{ end }} 
+{{ if .codesSpecs|len}}
+<h4>{{ .codesSpecs|len}} codes specs</h4> 
 <table class="table">
 <thead>
     <th>ID</th>
@@ -94,5 +107,8 @@
 {{end}}
 </tbody>
 </table>
+{{else}}
+<h4>No codes specs</h4>
+{{end}}
 
 {{ end }}
