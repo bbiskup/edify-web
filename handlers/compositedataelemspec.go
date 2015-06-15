@@ -12,7 +12,7 @@ var compositeDataElemSpecTemplates *template.Template
 
 func init() {
 	funcMap := template.FuncMap{
-		"DataElemSpecURL": defs.DataElemSpecURL,
+		"DataElemSpecURL": DataElemSpecURL,
 	}
 	t := template.New("layout.html").Funcs(funcMap)
 	compositeDataElemSpecTemplates = template.Must(t.ParseFiles(

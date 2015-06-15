@@ -17,10 +17,10 @@ var specSearchTemplates *template.Template
 
 func init() {
 	funcMap := template.FuncMap{
-		"MsgSpecURL":      defs.MsgSpecURL,
-		"SegSpecURL":      defs.SegSpecURL,
-		"DataElemSpecURL": defs.DataElemSpecURL,
-		"CodesSpecURL":    defs.CodesSpecURL,
+		"MsgSpecURL":      MsgSpecURL,
+		"SegSpecURL":      SegSpecURL,
+		"DataElemSpecURL": DataElemSpecURL,
+		"CodesSpecURL":    CodesSpecURL,
 	}
 	t := template.New("layout.html").Funcs(funcMap)
 	specSearchTemplates = template.Must(t.ParseFiles(
