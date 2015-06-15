@@ -41,7 +41,7 @@ func validateMsg(message string, w http.ResponseWriter) {
 	fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
 }
 
-func ValidateMsg(w http.ResponseWriter, r *http.Request) {
+func MsgValidation(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		err := msgValidationTemplates.ExecuteTemplate(w, "layout", nil)
 		if err != nil {
