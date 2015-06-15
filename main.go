@@ -27,6 +27,10 @@ func main() {
 		Name("specsearch").
 		Methods("GET")
 
+	r.HandleFunc("/browsespecs/", handlers.BrowseSpecs).
+		Name("browsespecs").
+		Methods("GET")
+
 	r.HandleFunc("/about/", handlers.About).
 		Name("about").
 		Methods("GET")
