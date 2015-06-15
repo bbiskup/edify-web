@@ -33,7 +33,8 @@ Features
 - import EDIFACT messags from OpenData source?
 - User account?
 - Ansible scripts for public server
-- Parallel search for specs? (Check if this could really be faster)
+- Parallel search for specs?
+  - Check if this could really be faster; BenchmarkSpecSearchNoResults
   - possibly: parallel rendering of templates?
 - List of all specs of a kind at URL /specs/message/, /specs/segment/, ....
 - Spec search: support data elements
