@@ -7,6 +7,7 @@ Bugs & Shortcomings
 - Support UNH, UNT etc. or give warning message about unparsed data elements
 - display message spec with groups (currently only linear list with only 
   top-level (trigger) segments)
+- bug? language name code (3453) missing from UNCL spec. 
 
 Features
 --------
@@ -28,11 +29,15 @@ Features
 - User account?
 - Ansible scripts for public server
 - Parallel search for specs? (Check if this could really be faster)
+  - possibly: parallel rendering of templates?
 - List of all specs of a kind at URL /specs/message/, /specs/segment/, ....
 - Spec search: support data elements
 - Spec search: support codes
 - Spec search: organize different kinds of specs in accordion or tabs
 - Spec search. (maybe) limit search to particular kinds of specs
+- Pagination of long tables (example: long code list http://localhost:8001/specs/simpledataelement/4451)
+  - client-side pagination for simplicity
+  - link at bottom of page to jump to top of page
 
 
 
