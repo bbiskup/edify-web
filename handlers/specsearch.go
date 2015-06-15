@@ -64,6 +64,19 @@ func searchCompositeDataElemSpecs(w http.ResponseWriter, searchTerm string) []*d
 	return result
 }
 
+// Search term in composite data element specifications
+func searchSimpleDataElemSpecs(w http.ResponseWriter, searchTerm string) []*dsp.SimpleDataElemSpec {
+	result := dsp.SimpleDataElemSpecs{}
+	for _, dataElemSpec := range defs.SpecParser.SimpleDataElemSpecs {
+		id := dataElemSpec.Id()
+		if strings.Contains(strings.ToLower(id), searchTerm) || strings.Contains(strings.ToLower(dataElemSpec.Name()), searchTerm) {
+			result = append(result, dataElemSpec)
+		}
+	}
+	sort.Sort(result)
+	return result
+}
+
 func SpecSearch(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
@@ -73,6 +86,7 @@ func SpecSearch(w http.ResponseWriter, r *http.Request) {
 	data["msgSpecs"] = searchMsgSpecs(w, searchTerm)
 	data["segSpecs"] = searchSegSpecs(w, searchTerm)
 	data["compositeDataElemSpecs"] = searchCompositeDataElemSpecs(w, searchTerm)
+	data["simpleDataElemSpecs"] = searchSimpleDataElemSpecs(w, searchTerm)
 	data["searchTerm"] = searchTerm
 
 	err := specSearchTemplates.ExecuteTemplate(w, "layout", data)
