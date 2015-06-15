@@ -46,6 +46,7 @@ Features
 - Pagination of long tables (example: long code list http://localhost:8001/specs/simpledataelement/4451)
   - client-side pagination for simplicity
   - link at bottom of page to jump to top of page
+- Autocomplete for search?
 
 
 
