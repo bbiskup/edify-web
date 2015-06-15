@@ -8,9 +8,14 @@ import (
 	ssp "github.com/bbiskup/edify/edifact/spec/segment"
 )
 
-// Procides URL for message spec resource
+// Provides URL for message spec ID
+func MsgSpecURLForId(msgSpecId string) string {
+	return fmt.Sprintf("/specs/message/%s", msgSpecId)
+}
+
+// Provides URL for message spec resource
 func MsgSpecURL(msgSpec *msp.MsgSpec) string {
-	return fmt.Sprintf("/specs/message/%s", msgSpec.Id)
+	return MsgSpecURLForId(msgSpec.Id)
 }
 
 // Provides URL for segment spec resource

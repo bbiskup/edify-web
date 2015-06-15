@@ -1,9 +1,16 @@
 {{define "content"}}
-<h1>Message validation</h1>
+<h2>Message validation</h2>
 <form method="POST">
     Paste EDIFACT message
     <input type="submit"  value="Submit">
     <p>
         <textarea class="edifact-text" name="message" cols="80" rows="10"></textarea>
 </form>
+<hr>
+{{ if .nestedMsg}}
+<h3>Parsed <a href="{{.nestedMsg.Name|MsgSpecURLForId}}">{{.nestedMsg.Name}}</a> message</h3>
+<pre>
+{{.nestedMsg.Dump}}
+</pre>
+{{end}}
 {{end}}

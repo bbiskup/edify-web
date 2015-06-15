@@ -13,7 +13,11 @@ import (
 var msgValidationTemplates *template.Template
 
 func init() {
-	msgValidationTemplates = template.Must(template.ParseFiles(
+	funcMap := template.FuncMap{
+		"MsgSpecURLForId": MsgSpecURLForId,
+	}
+	t := template.New("layout.html").Funcs(funcMap)
+	msgValidationTemplates = template.Must(t.ParseFiles(
 		defs.TemplatePaths("layout.html", "navbar.html", "msgvalidation.html")...,
 	))
 
@@ -38,14 +42,22 @@ func validateMsg(message string, w http.ResponseWriter) {
 		return
 	}
 
-	fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
+	// fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
+	data := map[string]interface{}{
+		"nestedMsg": nestedMsg,
+	}
+	renderTemplate(w, data)
 }
 
-func MsgValidationGET(w http.ResponseWriter, r *http.Request) {
-	err := msgValidationTemplates.ExecuteTemplate(w, "layout", nil)
+func renderTemplate(w http.ResponseWriter, data map[string]interface{}) {
+	err := msgValidationTemplates.ExecuteTemplate(w, "layout", data)
 	if err != nil {
 		log.Printf("Error executing template: %s", err)
 	}
+}
+
+func MsgValidationGET(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, nil)
 }
 
 func MsgValidationPOST(w http.ResponseWriter, r *http.Request) {
