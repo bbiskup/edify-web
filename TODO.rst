@@ -34,6 +34,8 @@ Features
 - Spec search: support data elements
 - Spec search: support codes
 - Spec search: organize different kinds of specs in accordion or tabs
+  - display badge with result count
+  - omit spec types with no results?
 - Spec search. (maybe) limit search to particular kinds of specs
 - Pagination of long tables (example: long code list http://localhost:8001/specs/simpledataelement/4451)
   - client-side pagination for simplicity
