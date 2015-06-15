@@ -1,0 +1,18 @@
+{{ define "msgspectable" }}
+{{ if .|len}}
+<h4>{{.|len}} message specs</h4> 
+<table class="table">
+<thead>
+    <th>ID</th>
+    <th>Name</th>
+</thead>
+<tbody>
+{{ range .}}
+<tr><td><a href="{{.|MsgSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
+{{end}}
+</tbody>
+</table>
+{{else}}
+<h4>No message specs</h4>
+{{end}}
+{{end}}

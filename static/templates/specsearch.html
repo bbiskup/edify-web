@@ -26,22 +26,7 @@
 <hr>
 <h3>Search results</h3>
 
-{{ if .msgSpecs|len}}
-<h4>{{.msgSpecs|len}} message specs</h4> 
-<table class="table">
-<thead>
-    <th>ID</th>
-    <th>Name</th>
-</thead>
-<tbody>
-{{ range .msgSpecs}}
-<tr><td><a href="{{.|MsgSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
-{{end}}
-</tbody>
-</table>
-{{else}}
-<h4>No message specs</h4>
-{{end}}
+{{ template "msgspectable" .msgSpecs}}
 
 {{ if .segSpecs|len}}
 <h4>{{ .segSpecs|len}} segment specs</h4> 

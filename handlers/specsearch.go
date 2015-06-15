@@ -24,7 +24,9 @@ func init() {
 	}
 	t := template.New("layout.html").Funcs(funcMap)
 	specSearchTemplates = template.Must(t.ParseFiles(
-		defs.TemplatePaths("layout.html", "navbar.html", "specsearch.html")...,
+		defs.TemplatePaths(
+			"layout.html", "navbar.html",
+			"specsearch.html", "msgspectable.html")...,
 	))
 }
 
