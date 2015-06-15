@@ -36,16 +36,18 @@ func validateMsg(message string, w http.ResponseWriter) {
 		return
 	}
 
+	data := map[string]interface{}{}
+
 	nestedMsg, err := defs.Validator.Validate(rawMsg)
 	if err != nil {
-		fmt.Fprintf(w, "Message validation failed: %s", err)
-		return
+		//fmt.Fprintf(w, "Message validation failed: %s", err)
+		data["validationError"] = err
+	} else {
+		data["nestedMsg"] = nestedMsg
 	}
 
 	// fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
-	data := map[string]interface{}{
-		"nestedMsg": nestedMsg,
-	}
+
 	renderTemplate(w, data)
 }
 

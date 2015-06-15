@@ -8,10 +8,18 @@
 </form>
 <hr>
 {{ if .nestedMsg}}
+<div class="alert alert-success" role="alert"><b>Validation successful</b></div>
 <h3>Parsed <a href="{{.nestedMsg.Name|MsgSpecURLForId}}">{{.nestedMsg.Name}}</a> message</h3>
 <pre>
 {{.nestedMsg.Dump}}
 </pre>
-
 {{end}}
+
+{{ if .validationError}}
+<div class="alert alert-danger" role="alert"><b>Message validation failed!</b> See error(s) below.</div>
+<pre>
+{{.validationError.Error}}
+</pre>
+{{end}}
+
 {{end}}
