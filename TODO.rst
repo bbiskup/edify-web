@@ -17,6 +17,7 @@ Features
 - File upload of spec
 - REST API for validating messages?
 - edify: give list of available (downloaded/extracted) spec versions
+- Spec search: fill combo box with available versions (default: most reccent)
 - structured output of parsed message (Dynatree?)
 - Display of (original?) message with tooltips containing spec information?
 - Rendering of messages with template
@@ -24,8 +25,7 @@ Features
 - store uploaded messages in DB?
 - import EDIFACT messags from OpenData source?
 - User account?
-
-Misc
-----
-
 - Ansible scripts for public server
+- Parallel search for specs? (Check if this could really be faster)
+
+
