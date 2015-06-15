@@ -2,6 +2,7 @@ package defs
 
 import (
 	"fmt"
+	csp "github.com/bbiskup/edify/edifact/spec/codes"
 	dsp "github.com/bbiskup/edify/edifact/spec/dataelement"
 	msp "github.com/bbiskup/edify/edifact/spec/message"
 	ssp "github.com/bbiskup/edify/edifact/spec/segment"
@@ -29,6 +30,7 @@ func MsgSpecPartURL(msgSpecPart msp.MsgSpecPart) string {
 	}
 }
 
+// Provices URL for composite or simple data element
 func DataElemSpecURL(dataElemSpec dsp.DataElemSpec) string {
 	switch dataElemSpec := dataElemSpec.(type) {
 	case *dsp.SimpleDataElemSpec:
@@ -39,4 +41,8 @@ func DataElemSpecURL(dataElemSpec dsp.DataElemSpec) string {
 		panic(fmt.Sprintf("Unexpected type: %T", dataElemSpec))
 	}
 
+}
+
+func CodesSpecURL(codesSpec *csp.CodesSpec) string {
+	return fmt.Sprintf("/specs/codes/%s", codesSpec.Id)
 }

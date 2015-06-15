@@ -1,0 +1,15 @@
+{{ define "content"}}
+<h2>Code <span class="edifact-id">{{.codeSpec.Id}}</span></h2>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Name:</th>
+            <td>{{.dataElemSpec.Name}}</td>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td>{{.dataElemSpec.Descr}}</td>
+        </tr>
+    </tbody>
+</table>
+{{end}}

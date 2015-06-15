@@ -81,4 +81,18 @@
 </tbody>
 </table>
 
+<h3>Codes specs</h3> 
+{{ if .codesSpecs|len}} Found {{ .codesSpecs|len}} codes specs {{ else }} {{ end }} 
+<table class="table">
+<thead>
+    <th>ID</th>
+    <th>Name</th>
+</thead>
+<tbody>
+{{ range .codesSpecs}}
+<tr><td><a href="{{.|CodesSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
+{{end}}
+</tbody>
+</table>
+
 {{ end }}

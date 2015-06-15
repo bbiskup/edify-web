@@ -33,6 +33,9 @@ func main() {
 	r.HandleFunc("/specs/simpledataelement/{id}", handlers.SimpleDataElemSpec).
 		Name("simpledataelemspec").
 		Methods("GET")
+	r.HandleFunc("/specs/code/{id}", handlers.CodeSpec).
+		Name("codespec").
+		Methods("GET")
 	r.PathPrefix("/static/edify/").
 		Name("edifystatic").
 		Handler(http.StripPrefix("/static/edify/", static))

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"github.com/bbiskup/edify-web/defs"
+	csp "github.com/bbiskup/edify/edifact/spec/codes"
 	dsp "github.com/bbiskup/edify/edifact/spec/dataelement"
 	msp "github.com/bbiskup/edify/edifact/spec/message"
 	ssp "github.com/bbiskup/edify/edifact/spec/segment"
@@ -19,6 +20,7 @@ func init() {
 		"MsgSpecURL":      defs.MsgSpecURL,
 		"SegSpecURL":      defs.SegSpecURL,
 		"DataElemSpecURL": defs.DataElemSpecURL,
+		"CodesSpecURL":    defs.CodesSpecURL,
 	}
 	t := template.New("layout.html").Funcs(funcMap)
 	specSearchTemplates = template.Must(t.ParseFiles(
@@ -64,7 +66,7 @@ func searchCompositeDataElemSpecs(w http.ResponseWriter, searchTerm string) []*d
 	return result
 }
 
-// Search term in composite data element specifications
+// Search term in simple data element specifications
 func searchSimpleDataElemSpecs(w http.ResponseWriter, searchTerm string) []*dsp.SimpleDataElemSpec {
 	result := dsp.SimpleDataElemSpecs{}
 	for _, dataElemSpec := range defs.SpecParser.SimpleDataElemSpecs {
@@ -77,8 +79,19 @@ func searchSimpleDataElemSpecs(w http.ResponseWriter, searchTerm string) []*dsp.
 	return result
 }
 
-func SpecSearch(w http.ResponseWriter, r *http.Request) {
+// Search term in code specs
+func searchCodesSpecs(w http.ResponseWriter, searchTerm string) []*csp.CodesSpec {
+	result := []*csp.CodesSpec{}
+	for _, codesSpec := range defs.SpecParser.CodesSpecs {
+		id := codesSpec.Id
+		if strings.Contains(strings.ToLower(id), searchTerm) || strings.Contains(strings.ToLower(codesSpec.Name), searchTerm) {
+			result = append(result, codesSpec)
+		}
+	}
+	return result
+}
 
+func SpecSearch(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	searchTerm := strings.ToLower(r.FormValue("searchterm"))
 	data := map[string]interface{}{}
@@ -87,6 +100,7 @@ func SpecSearch(w http.ResponseWriter, r *http.Request) {
 	data["segSpecs"] = searchSegSpecs(w, searchTerm)
 	data["compositeDataElemSpecs"] = searchCompositeDataElemSpecs(w, searchTerm)
 	data["simpleDataElemSpecs"] = searchSimpleDataElemSpecs(w, searchTerm)
+	data["codesSpecs"] = searchCodesSpecs(w, searchTerm)
 	data["searchTerm"] = searchTerm
 
 	err := specSearchTemplates.ExecuteTemplate(w, "layout", data)
