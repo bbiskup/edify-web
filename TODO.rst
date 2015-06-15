@@ -8,11 +8,15 @@ Bugs & Shortcomings
 - display message spec with groups (currently only linear list with only 
   top-level (trigger) segments)
 - bug? language name code (3453) missing from UNCL spec. 
+- check if code specs of simple data elem are nil and display appropriate msg
+  example: http://localhost:8001/specs/simpledataelement/6066
+  
 
 Features
 --------
 
 - Tests & benchmarks
+- Sort code search results
 - Codes list browseable/searchable
 - Expose additional spec info (notes, full description)
 - File upload of spec
