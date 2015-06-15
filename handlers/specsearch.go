@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"github.com/bbiskup/edify-web/defs"
+	dsp "github.com/bbiskup/edify/edifact/spec/dataelement"
 	msp "github.com/bbiskup/edify/edifact/spec/message"
 	ssp "github.com/bbiskup/edify/edifact/spec/segment"
 	"html/template"
@@ -15,8 +16,9 @@ var specSearchTemplates *template.Template
 
 func init() {
 	funcMap := template.FuncMap{
-		"MsgSpecURL": defs.MsgSpecURL,
-		"SegSpecURL": defs.SegSpecURL,
+		"MsgSpecURL":      defs.MsgSpecURL,
+		"SegSpecURL":      defs.SegSpecURL,
+		"DataElemSpecURL": defs.DataElemSpecURL,
 	}
 	t := template.New("layout.html").Funcs(funcMap)
 	specSearchTemplates = template.Must(t.ParseFiles(
@@ -49,6 +51,19 @@ func searchSegSpecs(w http.ResponseWriter, searchTerm string) []*ssp.SegSpec {
 	return result
 }
 
+// Search term in composite data element specifications
+func searchCompositeDataElemSpecs(w http.ResponseWriter, searchTerm string) []*dsp.CompositeDataElemSpec {
+	result := dsp.CompositeDataElemSpecs{}
+	for _, dataElemSpec := range defs.SpecParser.CompositeDataElemSpecs {
+		id := dataElemSpec.Id()
+		if strings.Contains(strings.ToLower(id), searchTerm) || strings.Contains(strings.ToLower(dataElemSpec.Name()), searchTerm) {
+			result = append(result, dataElemSpec)
+		}
+	}
+	sort.Sort(result)
+	return result
+}
+
 func SpecSearch(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
@@ -57,6 +72,7 @@ func SpecSearch(w http.ResponseWriter, r *http.Request) {
 	//log.Printf("Found %d message specs for search term %s", len(msgSpecs), searchTerm)
 	data["msgSpecs"] = searchMsgSpecs(w, searchTerm)
 	data["segSpecs"] = searchSegSpecs(w, searchTerm)
+	data["compositeDataElemSpecs"] = searchCompositeDataElemSpecs(w, searchTerm)
 	data["searchTerm"] = searchTerm
 
 	err := specSearchTemplates.ExecuteTemplate(w, "layout", data)

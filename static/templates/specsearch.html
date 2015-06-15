@@ -40,7 +40,7 @@
 </table>
 
 <h3>Segment specs</h3> 
-{{ if .segSpecs|len}} Found {{ .segSpecs|len}} message specs {{ else }} {{ end }} 
+{{ if .segSpecs|len}} Found {{ .segSpecs|len}} segment specs {{ else }} {{ end }} 
 <table class="table">
 <thead>
     <th>ID</th>
@@ -49,6 +49,20 @@
 <tbody>
 {{ range .segSpecs}}
 <tr><td><a href="{{.|SegSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
+{{end}}
+</tbody>
+</table>
+
+<h3>Composite data element specs</h3> 
+{{ if .compositeDataElemSpecs|len}} Found {{ .compositeDataElemSpecs|len}} composite data element specs {{ else }} {{ end }} 
+<table class="table">
+<thead>
+    <th>ID</th>
+    <th>Name</th>
+</thead>
+<tbody>
+{{ range .compositeDataElemSpecs}}
+<tr><td><a href="{{.|DataElemSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
 {{end}}
 </tbody>
 </table>
