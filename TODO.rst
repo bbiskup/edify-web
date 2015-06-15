@@ -22,6 +22,7 @@ Features
 - edify: give list of available (downloaded/extracted) spec versions
 - Spec search: fill combo box with available versions (default: most reccent)
 - structured output of parsed message (Dynatree?)
+- Render parsed nested msg with segment links
 - Display of (original?) message with tooltips containing spec information?
 - Rendering of messages with template
   - future (maybe): template as form, to allow creation of message
