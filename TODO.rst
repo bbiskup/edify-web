@@ -4,7 +4,7 @@ TODOs
 Bugs & Shortcomings
 -------------------
 
-- Support UNH, UNT etc. or give warning message about unparsed data elements
+- Support UNH, UNT etc.; remove warning in segspec.html once supported
 - display message spec with groups (currently only linear list with only 
   top-level (trigger) segments)
 - bug? language name code (3453) missing from UNCL spec.   
