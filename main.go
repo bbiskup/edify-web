@@ -14,6 +14,9 @@ func main() {
 
 	r.HandleFunc("/", handlers.Index).
 		Name("index").
+		Methods("GET")
+	r.HandleFunc("/message/validation/", handlers.ValidateMsg).
+		Name("messagevalidation").
 		Methods("GET", "POST")
 	r.HandleFunc("/specsearch/", handlers.SpecSearch).
 		Name("specsearch").
