@@ -16,6 +16,8 @@ Features
 --------
 
 - Tests & benchmarks
+  - use httptest.HttpResponseRecorder?
+  - Dependency injection à la http://www.markjberger.com/testing-web-apps-in-golang/ ?
 - Sort code search results
 - Codes list browseable/searchable
 - Expose additional spec info (notes, full description)
