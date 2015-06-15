@@ -13,7 +13,8 @@ Features
 --------
 
 - Tests & benchmarks
-  - Add github.com/PuerkitoBio/goquery library for validating response body 
+  - Add github.com/PuerkitoBio/goquery library for validating response body
+- Properly handle failed message validation 
 - Sort code search results
 - Codes list browseable/searchable
 - Expose additional spec info (notes, full description)
@@ -33,6 +34,9 @@ Features
 - Parallel search for specs?
   - Check if this could really be faster; BenchmarkSpecSearchNoResults
   - possibly: parallel rendering of templates?
+  - alternative: render template in response to search; this template
+    contains multiple tabs; each tab loads search results for a particular
+    spec type.
 - List of all specs of a kind at URL /specs/message/, /specs/segment/, ....
 - Spec search: support codes
 - Spec search: organize different kinds of specs in accordion or tabs
