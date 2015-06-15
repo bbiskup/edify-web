@@ -7,17 +7,12 @@ Bugs & Shortcomings
 - Support UNH, UNT etc. or give warning message about unparsed data elements
 - display message spec with groups (currently only linear list with only 
   top-level (trigger) segments)
-- bug? language name code (3453) missing from UNCL spec. 
-- check if code specs of simple data elem are nil and display appropriate msg
-  example: http://localhost:8001/specs/simpledataelement/6066
-  
+- bug? language name code (3453) missing from UNCL spec.   
 
 Features
 --------
 
 - Tests & benchmarks
-  - use httptest.HttpResponseRecorder?
-  - Dependency injection à la http://www.markjberger.com/testing-web-apps-in-golang/ ?
   - Add github.com/PuerkitoBio/goquery library for validating response body 
 - Sort code search results
 - Codes list browseable/searchable
@@ -38,7 +33,6 @@ Features
   - Check if this could really be faster; BenchmarkSpecSearchNoResults
   - possibly: parallel rendering of templates?
 - List of all specs of a kind at URL /specs/message/, /specs/segment/, ....
-- Spec search: support data elements
 - Spec search: support codes
 - Spec search: organize different kinds of specs in accordion or tabs
   - display badge with result count

@@ -13,7 +13,9 @@
     </tbody>
 </table>
 <hr>
+
 <h3>Codes</h3>
+{{if .dataElemSpec.CodesSpecs}}
 <table class="table">
     <thead>
         <tr>
@@ -32,4 +34,7 @@
         {{end}}
     </tbody>
 </table>
+{{else}}
+This data element does not use codes.
+{{end}}
 {{end}}
