@@ -4,3 +4,7 @@
 td.td-max-count {
     text-align: right;
 }
+span.edifact-id {
+    font-weight: bold;    /* text-decoration: underline; */
+    color: blue;
+}

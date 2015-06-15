@@ -1,9 +1,12 @@
 {{ define "content"}}
-<h2>{{.msgSpec.Id}}</h2>
-<h3>{{.msgSpec.Name}}</h3>
+<h2>Message <span class="edifact-id">{{.msgSpec.Id}}</span></h2>
 <h4>Metadata</h4>
 <table class="table">
     <tbody>
+        <tr>
+            <td>Name:</td>
+            <td>{{.msgSpec.Name}}</td>
+        </tr>
         <tr>
             <td>Version:</td>
             <td>{{.msgSpec.Version}}</td>
