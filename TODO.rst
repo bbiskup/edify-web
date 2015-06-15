@@ -27,5 +27,10 @@ Features
 - User account?
 - Ansible scripts for public server
 - Parallel search for specs? (Check if this could really be faster)
+- List of all specs of a kind at URL /specs/message/, /specs/segment/, ....
+- Spec search: support data elements
+- Spec search: support codes
+- Spec search: organize different kinds of specs in accordion or tabs
+- Spec search. (maybe) limit search to particular kinds of specs
 
 
