@@ -29,7 +29,7 @@ func init() {
 }
 
 // Search term in message specifications
-func searchMsgSpecs(w http.ResponseWriter, searchTerm string) []*msp.MsgSpec {
+func searchMsgSpecs(searchTerm string) []*msp.MsgSpec {
 	result := msp.MsgSpecs{}
 	for msgId, msgSpec := range defs.Validator.MsgSpecs {
 		if strings.Contains(strings.ToLower(msgId), searchTerm) || strings.Contains(strings.ToLower(msgSpec.Name), searchTerm) {
@@ -41,7 +41,7 @@ func searchMsgSpecs(w http.ResponseWriter, searchTerm string) []*msp.MsgSpec {
 }
 
 // Search term in segment specifications
-func searchSegSpecs(w http.ResponseWriter, searchTerm string) []*ssp.SegSpec {
+func searchSegSpecs(searchTerm string) []*ssp.SegSpec {
 	result := ssp.SegSpecs{}
 	for _, segID := range defs.Validator.SegSpecs.Ids() {
 		segSpec := defs.Validator.SegSpecs.Get(segID)
@@ -54,7 +54,7 @@ func searchSegSpecs(w http.ResponseWriter, searchTerm string) []*ssp.SegSpec {
 }
 
 // Search term in composite data element specifications
-func searchCompositeDataElemSpecs(w http.ResponseWriter, searchTerm string) []*dsp.CompositeDataElemSpec {
+func searchCompositeDataElemSpecs(searchTerm string) []*dsp.CompositeDataElemSpec {
 	result := dsp.CompositeDataElemSpecs{}
 	for _, dataElemSpec := range defs.SpecParser.CompositeDataElemSpecs {
 		id := dataElemSpec.Id()
@@ -67,7 +67,7 @@ func searchCompositeDataElemSpecs(w http.ResponseWriter, searchTerm string) []*d
 }
 
 // Search term in simple data element specifications
-func searchSimpleDataElemSpecs(w http.ResponseWriter, searchTerm string) []*dsp.SimpleDataElemSpec {
+func searchSimpleDataElemSpecs(searchTerm string) []*dsp.SimpleDataElemSpec {
 	result := dsp.SimpleDataElemSpecs{}
 	for _, dataElemSpec := range defs.SpecParser.SimpleDataElemSpecs {
 		id := dataElemSpec.Id()
@@ -80,7 +80,7 @@ func searchSimpleDataElemSpecs(w http.ResponseWriter, searchTerm string) []*dsp.
 }
 
 // Search term in code specs
-func searchCodesSpecs(w http.ResponseWriter, searchTerm string) []*csp.CodesSpec {
+func searchCodesSpecs(searchTerm string) []*csp.CodesSpec {
 	result := []*csp.CodesSpec{}
 	for _, codesSpec := range defs.SpecParser.CodesSpecs {
 		id := codesSpec.Id
@@ -96,11 +96,11 @@ func SpecSearch(w http.ResponseWriter, r *http.Request) {
 	searchTerm := strings.ToLower(r.FormValue("searchterm"))
 	data := map[string]interface{}{}
 	//log.Printf("Found %d message specs for search term %s", len(msgSpecs), searchTerm)
-	data["msgSpecs"] = searchMsgSpecs(w, searchTerm)
-	data["segSpecs"] = searchSegSpecs(w, searchTerm)
-	data["compositeDataElemSpecs"] = searchCompositeDataElemSpecs(w, searchTerm)
-	data["simpleDataElemSpecs"] = searchSimpleDataElemSpecs(w, searchTerm)
-	data["codesSpecs"] = searchCodesSpecs(w, searchTerm)
+	data["msgSpecs"] = searchMsgSpecs(searchTerm)
+	data["segSpecs"] = searchSegSpecs(searchTerm)
+	data["compositeDataElemSpecs"] = searchCompositeDataElemSpecs(searchTerm)
+	data["simpleDataElemSpecs"] = searchSimpleDataElemSpecs(searchTerm)
+	data["codesSpecs"] = searchCodesSpecs(searchTerm)
 	data["searchTerm"] = searchTerm
 
 	err := specSearchTemplates.ExecuteTemplate(w, "layout", data)
