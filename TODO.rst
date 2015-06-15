@@ -18,6 +18,7 @@ Features
 - Tests & benchmarks
   - use httptest.HttpResponseRecorder?
   - Dependency injection à la http://www.markjberger.com/testing-web-apps-in-golang/ ?
+  - Add github.com/PuerkitoBio/goquery library for validating response body 
 - Sort code search results
 - Codes list browseable/searchable
 - Expose additional spec info (notes, full description)
