@@ -14,7 +14,6 @@ Features
 
 - Tests & benchmarks
   - Add github.com/PuerkitoBio/goquery library for validating response body
-- Properly handle failed message validation 
 - Sort code search results
 - Codes list browseable/searchable
 - Expose additional spec info (notes, full description)
