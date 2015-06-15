@@ -11,7 +11,9 @@ Bugs & Shortcomings
 Features
 --------
 
+- Tests & benchmarks
 - Codes list browseable/searchable
+- Data elements browseable/searchable
 - Show codes with simple data element
 - Expose additional spec info (notes, full description)
 - File upload of spec
@@ -32,5 +34,6 @@ Features
 - Spec search: support codes
 - Spec search: organize different kinds of specs in accordion or tabs
 - Spec search. (maybe) limit search to particular kinds of specs
+
 
 
