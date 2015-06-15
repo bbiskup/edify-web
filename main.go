@@ -9,8 +9,8 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	static := http.FileServer(http.Dir(defs.STATIC_DIR))
-	bower := http.FileServer(http.Dir(defs.BOWER_DIR))
+	static := http.FileServer(http.Dir(defs.StaticDir))
+	bower := http.FileServer(http.Dir(defs.BowerDir))
 
 	r.HandleFunc("/", handlers.Index).
 		Name("index").
