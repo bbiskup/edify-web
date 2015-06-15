@@ -41,19 +41,16 @@ func validateMsg(message string, w http.ResponseWriter) {
 	fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
 }
 
-func MsgValidation(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		err := msgValidationTemplates.ExecuteTemplate(w, "layout", nil)
-		if err != nil {
-			log.Printf("Error executing template: %s", err)
-		}
-	} else if r.Method == "POST" {
-		r.ParseForm()
-		//log.Printf("Form: %s", r.Form)
-		message := r.FormValue("message")
-		validateMsg(message, w)
-
-	} else {
-		panic(fmt.Sprintf("Unsupported method %s", r.Method))
+func MsgValidationGET(w http.ResponseWriter, r *http.Request) {
+	err := msgValidationTemplates.ExecuteTemplate(w, "layout", nil)
+	if err != nil {
+		log.Printf("Error executing template: %s", err)
 	}
+}
+
+func MsgValidationPOST(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	//log.Printf("Form: %s", r.Form)
+	message := r.FormValue("message")
+	validateMsg(message, w)
 }
