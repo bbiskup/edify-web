@@ -6,4 +6,26 @@
 <tr><th>Description:</th><td>{{.dataElemSpec.Descr}}</td></tr>
 </tbody>
 </table>
+<hr>
+
+<h3>Simpe Data elements</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Representation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .dataElemSpec.ComponentSpecs}}
+        <tr>
+            <td><a href="{{.SimpleDataElemSpec|DataElemSpecURL}}">{{.SimpleDataElemSpec.Id}}</a></td>
+            <td>{{.SimpleDataElemSpec.Name}}</td>
+            <td>{{.SimpleDataElemSpec.Repr}}</td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
+
 {{end}}

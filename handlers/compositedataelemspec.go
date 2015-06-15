@@ -11,7 +11,9 @@ import (
 var compositeDataElemSpecTemplates *template.Template
 
 func init() {
-	funcMap := template.FuncMap{}
+	funcMap := template.FuncMap{
+		"DataElemSpecURL": defs.DataElemSpecURL,
+	}
 	t := template.New("layout.html").Funcs(funcMap)
 	compositeDataElemSpecTemplates = template.Must(t.ParseFiles(
 		defs.TemplatePaths("layout.html", "navbar.html", "compositedataelemspec.html")...,
