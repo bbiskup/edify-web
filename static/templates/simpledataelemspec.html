@@ -1,9 +1,35 @@
 {{ define "content"}}
 <h2>Simple data element {{.dataElemSpec.Id}}</h2>
 <table class="table">
-<tbody>
-<tr><th>Name:</th><td>{{.dataElemSpec.Name}}</td></tr>
-<tr><th>Description:</th><td>{{.dataElemSpec.Descr}}</td></tr>
-</tbody>
+    <tbody>
+        <tr>
+            <th>Name:</th>
+            <td>{{.dataElemSpec.Name}}</td>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td>{{.dataElemSpec.Descr}}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h3>Codes</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{range .dataElemSpec.CodesSpecs.CodeSpecs}}
+        <tr>
+            <td>{{.Id}}</td>
+            <td>{{.Name}}</td>
+            <td>{{.Descr}}</td>
+        </tr>
+        {{end}}
+    </tbody>
 </table>
 {{end}}

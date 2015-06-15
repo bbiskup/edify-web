@@ -14,7 +14,6 @@ Features
 - Tests & benchmarks
 - Codes list browseable/searchable
 - Data elements browseable/searchable
-- Show codes with simple data element
 - Expose additional spec info (notes, full description)
 - File upload of spec
 - REST API for validating messages?
