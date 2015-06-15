@@ -1,4 +1,3 @@
-TODOs
 =====
 
 Bugs & Shortcomings
@@ -27,11 +26,9 @@ Features
 - Rendering of messages with template
   - future (maybe): template as form, to allow creation of message
 - store uploaded messages in DB?
-- import EDIFACT messags from OpenData source?
-- User account?
 - Ansible scripts for public server
 - Parallel search for specs?
-  - Check if this could really be faster; BenchmarkSpecSearchNoResults
+  - Not pressing; search with all results takes 32ms, with no results: 1.4 ms
   - possibly: parallel rendering of templates?
   - alternative: render template in response to search; this template
     contains multiple tabs; each tab loads search results for a particular
