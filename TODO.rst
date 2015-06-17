@@ -15,7 +15,6 @@ Features
   - Add github.com/PuerkitoBio/goquery library for validating response body
 - Sort code search results
 - Filtering of spec tables?
-- data element list browseable/searchable
 - Codes list browseable/searchable
 - Expose additional spec info (notes, full description)
 - File upload of spec

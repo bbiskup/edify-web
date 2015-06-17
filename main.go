@@ -52,6 +52,9 @@ func main() {
 	r.HandleFunc("/specs/compositedataelement/{id}", handlers.CompositeDataElemSpec).
 		Name("compositedataelemspec").
 		Methods("GET")
+	r.HandleFunc("/specs/compositedataelement/", handlers.CompositeDataElemSpecs).
+		Name("compositedataelements").
+		Methods("GET")
 
 	r.HandleFunc("/specs/simpledataelement/{id}", handlers.SimpleDataElemSpec).
 		Name("simpledataelemspec").
