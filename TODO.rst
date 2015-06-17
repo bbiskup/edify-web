@@ -15,6 +15,7 @@ Features
   - Add github.com/PuerkitoBio/goquery library for validating response body
 - Sort code search results
 - Filtering of spec tables?
+- data element list browseable/searchable
 - Codes list browseable/searchable
 - Expose additional spec info (notes, full description)
 - File upload of spec
@@ -34,7 +35,6 @@ Features
   - alternative: render template in response to search; this template
     contains multiple tabs; each tab loads search results for a particular
     spec type.
-- List of all specs of a kind at URL /specs/message/, /specs/segment/, ....
 - Spec search: support codes
 - Spec search: organize different kinds of specs in accordion or tabs
   - display badge with result count

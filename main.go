@@ -43,7 +43,10 @@ func main() {
 		Methods("GET")
 
 	r.HandleFunc("/specs/segment/{id}", handlers.SegSpec).
-		Name("segspec").
+		Name("segspecs").
+		Methods("GET")
+	r.HandleFunc("/specs/segment/", handlers.SegSpecs).
+		Name("segments").
 		Methods("GET")
 
 	r.HandleFunc("/specs/compositedataelement/{id}", handlers.CompositeDataElemSpec).
