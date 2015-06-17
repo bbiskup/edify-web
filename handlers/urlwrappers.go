@@ -49,5 +49,5 @@ func DataElemSpecURL(dataElemSpec dsp.DataElemSpec) string {
 }
 
 func CodesSpecURL(codesSpec *csp.CodesSpec) string {
-	return fmt.Sprintf("/specs/codes/%s", codesSpec.Id)
+	return fmt.Sprintf("/specs/code/%s", codesSpec.Id)
 }
