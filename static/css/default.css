@@ -1,3 +1,6 @@
+body {
+    font-family: "Droid Sans" !important;
+}
 .edifact-text {
     font-family: monospace;
 }
@@ -8,6 +11,4 @@ span.edifact-id {
     font-weight: bold;    /* text-decoration: underline; */
     color: blue;
 }
-img.github-ribbon {
-    z-index: 10000;
-}
+z-index
