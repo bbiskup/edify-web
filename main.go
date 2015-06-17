@@ -59,6 +59,9 @@ func main() {
 	r.HandleFunc("/specs/simpledataelement/{id}", handlers.SimpleDataElemSpec).
 		Name("simpledataelemspec").
 		Methods("GET")
+	r.HandleFunc("/specs/simpledataelement/", handlers.SimpleDataElemSpecs).
+		Name("simpledataelements").
+		Methods("GET")
 
 	r.HandleFunc("/specs/code/{id}", handlers.CodeSpec).
 		Name("codespec").

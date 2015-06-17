@@ -1,0 +1,15 @@
+{{ define "content"}} {{ if .|len}}
+<h4>{{.|len}} simple data element specs</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range . }} 
+        <tr><td><a href="{{.|DataElemSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
+        {{end}}
+    </tbody>
+</table>{{end}} {{ end }}
