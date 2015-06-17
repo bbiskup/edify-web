@@ -11,4 +11,6 @@ span.edifact-id {
     font-weight: bold;    /* text-decoration: underline; */
     color: blue;
 }
-z-index
+img.github-ribbon {
+    z-index: 10000;
+}
