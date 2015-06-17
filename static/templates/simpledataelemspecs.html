@@ -5,11 +5,16 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th># Codes</th>
         </tr>
     </thead>
     <tbody>
-        {{ range . }} 
-        <tr><td><a href="{{.|DataElemSpecURL}}">{{.Id}}</a></td><td>{{.Name}}</td></tr>
+        {{ range . }}
+        <tr>
+            <td><a href="{{.|DataElemSpecURL}}">{{.Id}}</a></td>
+            <td>{{.Name}}</td>
+            <td>{{if .CodesSpecs}}{{.CodesSpecs.Len}}{{else}}-{{end}}</td>
+        </tr>
         {{end}}
     </tbody>
 </table>{{end}} {{ end }}
