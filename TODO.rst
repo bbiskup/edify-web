@@ -20,7 +20,7 @@ Features
 - File upload of spec
 - REST API for validating messages?
 - edify: give list of available (downloaded/extracted) spec versions
-- Spec search: fill combo box with available versions (default: most reccent)
+- Spec search: fill combo box with available versions (default: most recent)
 - structured output of parsed message (Dynatree?)
 - Render parsed nested msg with segment links
 - Display of (original?) message with tooltips containing spec information?
