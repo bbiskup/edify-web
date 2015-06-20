@@ -35,6 +35,9 @@ func main() {
 		Name("about").
 		Methods("GET")
 
+	r.HandleFunc("/specs/message/{id}/{segGroupName}", handlers.MsgSpecSegGrp).
+		Name("msgspecseggrp").
+		Methods("GET")
 	r.HandleFunc("/specs/message/{id}", handlers.MsgSpec).
 		Name("msgspec").
 		Methods("GET")

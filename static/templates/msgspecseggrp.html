@@ -1,0 +1,5 @@
+{{ define "content"}}
+<h2>Segment group <span class="edifact-id">{{.msgSpec.Id}} - {{.segGrpName}}</span></h2>
+
+{{ template "msgspecgrpchildren" .}}
+{{end}}

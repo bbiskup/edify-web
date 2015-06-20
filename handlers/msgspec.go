@@ -18,16 +18,19 @@ func init() {
 	}
 	t := template.New("layout.html").Funcs(funcMap)
 	msgSpecTemplates = template.Must(t.ParseFiles(
-		defs.TemplatePaths("layout.html", "navbar.html", "msgspec.html")...,
+		defs.TemplatePaths(
+			"layout.html", "navbar.html", "msgspec.html", "msgspecgrpchildren.html")...,
 	))
 }
 
 func MsgSpec(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	msgSpecID := vars["id"]
+	msgSpec := defs.Validator.MsgSpecs[msgSpecID]
 
 	data := map[string]interface{}{
-		"msgSpec": defs.Validator.MsgSpecs[msgSpecID],
+		"msgSpec":  msgSpec,
+		"children": msgSpec.TopLevelGrp.Children(),
 	}
 
 	err := msgSpecTemplates.ExecuteTemplate(w, "layout", data)

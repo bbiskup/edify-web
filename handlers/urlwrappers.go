@@ -40,8 +40,8 @@ func MsgSpecPartURL(msgSpecPart msp.MsgSpecPart) string {
 	}*/
 }
 
-func MsgSpecGrpURL(msgSpecGrp *msp.MsgSpecSegGrpPart) string {
-	return fmt.Sprintf("TODO_%s", msgSpecGrp.Name())
+func MsgSpecGrpURL(msgSpecGrp *msp.MsgSpecSegGrpPart, msgID string) string {
+	return fmt.Sprintf("/specs/message/%s/%s", msgID, msgSpecGrp.Name())
 }
 
 // Provices URL for composite or simple data element
