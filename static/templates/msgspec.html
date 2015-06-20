@@ -39,6 +39,7 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Name</th>
             <th>Group?</th>
             <th>Mandatory?</th>
             <th>Max. Count</th>
@@ -48,6 +49,7 @@
         {{ range .msgSpec.TopLevelGrp.Children}}
         <tr>
             <td><a href="{{.|MsgSpecPartURL}}">{{.Id}}</a></td>
+            <td>{{if .IsGroup}}<a href="{{.|MsgSpecGrpURL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}</td>
             <td>{{.IsGroup}}</td>
             <td>{{.IsMandatory}}</td>
             <td class="td-max-count">{{.MaxCount}}</td>

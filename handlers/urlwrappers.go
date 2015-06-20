@@ -20,19 +20,28 @@ func MsgSpecURL(msgSpec *msp.MsgSpec) string {
 
 // Provides URL for segment spec resource
 func SegSpecURL(segSpec *ssp.SegSpec) string {
-	return fmt.Sprintf("/specs/segment/%s", segSpec.Id)
+	return SegSpecURLById(segSpec.Id)
+}
+
+func SegSpecURLById(segID string) string {
+	return fmt.Sprintf("/specs/segment/%s", segID)
 }
 
 // Provides URL for message spec part resource
 func MsgSpecPartURL(msgSpecPart msp.MsgSpecPart) string {
-	switch msgSpecPart := msgSpecPart.(type) {
+	return SegSpecURLById(msgSpecPart.Id())
+	/*switch msgSpecPart := msgSpecPart.(type) {
 	case *msp.MsgSpecSegPart:
 		return SegSpecURL(msgSpecPart.SegSpec)
 	case *msp.MsgSpecSegGrpPart:
-		return fmt.Sprintf("TODO_seg_group_%s", msgSpecPart.Id())
+		return fmt.Sprintf("TODO_seg_group_%s", msgSpecPart.Name())
 	default:
 		panic(fmt.Sprintf("Unsupported type %T", msgSpecPart))
-	}
+	}*/
+}
+
+func MsgSpecGrpURL(msgSpecGrp *msp.MsgSpecSegGrpPart) string {
+	return fmt.Sprintf("TODO_%s", msgSpecGrp.Name())
 }
 
 // Provices URL for composite or simple data element

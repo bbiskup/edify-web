@@ -14,6 +14,7 @@ func init() {
 	funcMap := template.FuncMap{
 		"MsgSpecURL":     MsgSpecURL,
 		"MsgSpecPartURL": MsgSpecPartURL,
+		"MsgSpecGrpURL":  MsgSpecGrpURL,
 	}
 	t := template.New("layout.html").Funcs(funcMap)
 	msgSpecTemplates = template.Must(t.ParseFiles(
