@@ -1,0 +1,21 @@
+{{define "content"}}
+<h2>Message query</h2>
+<form method="POST">
+    Paste EDIFACT message
+    <input type="submit" value="Submit">
+    <p>
+        <input type="text" name="query" placeholder="Query">
+        <p>
+            <textarea class="edifact-text" name="message" placeholder="EDIFACT Message" cols="80" rows="10"></textarea>
+</form>
+<hr>
+<hr> {{ if .queryResult}}
+<div class="alert alert-success" role="alert"><b>Query successful</b></div>
+<h3>Query result</h3>
+<pre>
+{{.queryResult.Dump}}
+</pre> {{end}} {{ if .validationError}}
+<div class="alert alert-danger" role="alert"><b>Message query failed!</b> See error(s) below.</div>
+<pre>
+{{.validationError.Error}}
+</pre> {{end}} {{end}}

@@ -48,10 +48,10 @@ func validateMsg(message string, w http.ResponseWriter) {
 
 	// fmt.Fprintf(w, "Nested msg: %s", nestedMsg.Dump())
 
-	renderTemplate(w, data)
+	renderValidationTemplate(w, data)
 }
 
-func renderTemplate(w http.ResponseWriter, data map[string]interface{}) {
+func renderValidationTemplate(w http.ResponseWriter, data map[string]interface{}) {
 	err := msgValidationTemplates.ExecuteTemplate(w, "layout", data)
 	if err != nil {
 		log.Printf("Error executing template: %s", err)
@@ -59,7 +59,7 @@ func renderTemplate(w http.ResponseWriter, data map[string]interface{}) {
 }
 
 func MsgValidationGET(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, nil)
+	renderValidationTemplate(w, nil)
 }
 
 func MsgValidationPOST(w http.ResponseWriter, r *http.Request) {

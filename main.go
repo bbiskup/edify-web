@@ -16,6 +16,13 @@ func main() {
 		Name("index").
 		Methods("GET")
 
+	r.HandleFunc("/message/query/", handlers.QueryMsgGET).
+		Name("querysg").
+		Methods("GET")
+	r.HandleFunc("/message/query/", handlers.QueryMsgPOST).
+		Name("querysg").
+		Methods("POST")
+
 	r.HandleFunc("/message/validation/", handlers.MsgValidationGET).
 		Name("messagevalidation").
 		Methods("GET")
