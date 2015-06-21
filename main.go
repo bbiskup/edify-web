@@ -1,13 +1,35 @@
 package main
 
 import (
+	"fmt"
 	"github.com/bbiskup/edify-web/defs"
 	"github.com/bbiskup/edify-web/handlers"
+	"github.com/codegangsta/cli"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
+	"os"
+)
+
+var (
+	hostFlag = cli.StringFlag{
+		Name:  "host, H",
+		Value: "localhost",
+		Usage: "Host name or IP address of web server",
+	}
+	portFlag = cli.IntFlag{
+		Name:  "port, p",
+		Value: 8001,
+		Usage: "TCP port of web server",
+	}
 )
 
 func main() {
+	app := cli.NewApp()
+	app.Name = "edify-web"
+	app.Usage = "EDIFACT web application"
+	app.EnableBashCompletion = true
+
 	r := mux.NewRouter()
 	static := http.FileServer(http.Dir(defs.StaticDir))
 	bower := http.FileServer(http.Dir(defs.BowerDir))
@@ -85,17 +107,27 @@ func main() {
 		Name("bowerstatic").
 		Handler(http.StripPrefix("/static/bower/", bower))
 
-	// rev, err := r.GetRoute("about").URL()
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// log.Printf("#### reverse: %s", rev)
+	app.Commands = []cli.Command{
+		{
+			Name:    "run",
+			Usage:   "Run web application",
+			Aliases: []string{"r"},
+			Action: func(c *cli.Context) {
+				addrStr := fmt.Sprintf("%s:%d", c.String("host"), c.Int("port"))
+				log.Printf("Listening on %s", addrStr)
+				server := &http.Server{
+					Addr:    addrStr,
+					Handler: r,
+				}
+				if err := server.ListenAndServe(); err != nil {
+					panic(err)
+				}
+			},
+			Flags: []cli.Flag{
+				hostFlag, portFlag,
+			},
+		},
+	}
 
-	server := &http.Server{
-		Addr:    "0.0.0.0:8001",
-		Handler: r,
-	}
-	if err := server.ListenAndServe(); err != nil {
-		panic(err)
-	}
+	app.Run(os.Args)
 }
