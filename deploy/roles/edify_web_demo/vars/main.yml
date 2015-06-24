@@ -1,0 +1,5 @@
+edify_demo_user: edify_demo
+demo_home: /home/{{edify_demo_user}}
+refresh_apt: False
+go_version: go1.4
+# gopath: "{{demo_home}}/go"

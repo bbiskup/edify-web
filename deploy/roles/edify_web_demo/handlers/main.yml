@@ -1,0 +1,8 @@
+- name: restart supervisor
+  shell: service supervisor force-reload
+
+- name: restart edify_web_demo
+  supervisorctl: name=edify_web_demo:{{item}} state=restarted
+  with_items:
+    - edify_web_server
+

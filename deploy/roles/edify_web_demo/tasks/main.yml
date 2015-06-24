@@ -1,0 +1,115 @@
+---
+# Demo server for edify_web application
+# Prerequisite:
+# Role "common" (https://github.com/bbiskup/ansible-serverconfig)
+
+- include_vars: main.yml
+- name: Create demo user
+  user: >
+      name={{edify_demo_user}}
+      comment="Demo user for edify test runner"
+      home="{{demo_home}}"
+
+- name: Package management | APT update & upgrade
+  apt: update_cache=yes upgrade=full
+  when: refresh_apt
+
+- name: Install prerequisite APT packages
+  apt: name={{item}}
+  with_items:
+    - git
+    - supervisor
+    - nmap
+    - bison
+
+#- name: Create GOPATH
+#  file: path="{{gopath}}" state=directory
+#  sudo_user: "{{edify_demo_user}}"
+
+#- name: Set up GOPATH environment
+#  lineinfile:
+#    dest="{{demo_home}}/.profile"
+#    line="export GOPATH={{gopath}}"
+#  sudo_user: "{{edify_demo_user}}"
+
+#- name: Remove gvm if it exists (to avoid error "already installed")
+#  shell:
+#    rm -rf "{{demo_home}}/.gvm"
+
+- name: Install gvm
+  shell: >
+     curl -s https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer | bash
+  args:
+    executable: /bin/bash
+  ignore_errors: true
+  sudo_user: "{{edify_demo_user}}"
+
+#- name: Activate gvm path
+#  shell: >
+#    . "{{demo_home}}/.gvm/bin/gvm-prompt"
+#  args:
+#    executable: /bin/bash
+#  sudo: yes
+
+- name: Set up gvm path and environment
+  lineinfile:
+    dest="{{demo_home}}/.profile"
+    line='[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"'
+  sudo_user: "{{edify_demo_user}}"
+
+- name: Install go1.4
+  shell: >
+    bash -lc ". $HOME/.gvm/scripts/gvm && ~/.gvm/bin/gvm install {{go_version}}"
+  args:
+    executable: /bin/bash
+  ignore_errors: true
+  sudo_user: "{{edify_demo_user}}"
+
+- name: Clone edify (development version)
+  shell: >
+    bash -lc "(. $HOME/.gvm/scripts/gvm && gvm use {{go_version}} && cd \$GOPATH/src/github.com/bbiskup && git clone https://github.com/bbiskup/edify.git)"
+  args:
+    executable: /bin/bash
+  ignore_errors: true
+  sudo_user: "{{edify_demo_user}}"
+
+- name: Install edify
+  shell: >
+    bash -lc "(. $HOME/.gvm/scripts/gvm && gvm use {{go_version}} && cd \$GOPATH/src/github.com/bbiskup/edify && git checkout dev && git pull && go get ./... && go install)"
+  args:
+    executable: /bin/bash
+  sudo_user: "{{edify_demo_user}}"
+
+- name: Clone edify-web (development version)
+  shell: >
+    bash -lc "(. $HOME/.gvm/scripts/gvm && gvm use {{go_version}} && cd \$GOPATH/src/github.com/bbiskup && git clone https://github.com/bbiskup/edify-web.git)"
+  args:
+    executable: /bin/bash
+  ignore_errors: true
+  sudo_user: "{{edify_demo_user}}"
+
+- name: Install edify-web
+  shell: >
+    bash -lc "(. $HOME/.gvm/scripts/gvm && gvm use {{go_version}} && cd \$GOPATH/src/github.com/bbiskup/edify-web && git checkout dev && git pull && go get ./... && go install)"
+  args:
+    executable: /bin/bash
+  sudo_user: "{{edify_demo_user}}"
+
+- name: Download UNCE EDIFACT specs
+  shell: >
+    bash -lc ". $HOME/.gvm/scripts/gvm && cd \$HOME && gvm use {{go_version}} && cd \$GOPATH/src/github.com/bbiskup/edify-web && edify download_specs 14B && edify extract_specs 14B"
+  args:
+    executable: /bin/bash
+  sudo_user: "{{edify_demo_user}}"
+
+- name: Install start script
+  template: >
+    src=scripts/run_edify-web.sh
+    dest={{demo_home}}/run_edify-web.sh
+
+- name: Configure supervisor to run demo server and tests
+  template: >
+    src=supervisor/edify_web_demo.conf.j2
+    dest=/etc/supervisor/conf.d/edify_demo.conf
+  notify:
+    - restart supervisor

@@ -1,0 +1,14 @@
+# {{ansible_managed}}
+#
+
+[group:edify_web_demo]
+programs=edify_web_server
+
+[program:edify_web_server]
+user = {{edify_demo_user}}
+directory={{demo_home}}
+command={{demo_home}}/run_edify-web.sh
+autostart=true
+autorestart=true
+redirect_stderr=true
+

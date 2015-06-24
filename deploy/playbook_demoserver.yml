@@ -1,0 +1,5 @@
+---
+- hosts: demo_servers
+  sudo: yes
+  roles:
+    - edify_web_demo

@@ -70,3 +70,13 @@ test-curl-1:
 get-edifact-specs:
 	edify download_specs
 	edify extract_specs
+
+######### Deployment
+
+# Provisioning public-facing demo server
+provision-public:
+	ansible-playbook -i deploy/inventory/ deploy/playbook_demoserver.yml
+
+# Provision development container
+provision-dev:
+	ansible-playbook -i deploy/inventory/ deploy/playbook_devserver.yml -v
