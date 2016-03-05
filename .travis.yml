@@ -28,7 +28,7 @@ script:
   - # avoid excessive output
   - make bench 2> bench.log
   - make cover
-  - ./edify-web &
+  - ./edify-web run &
   - sleep 5  # Allow for initialization
   - make test-curl-1
 
