@@ -1,3 +1,5 @@
+all: build up
+
 test:
 	# Run test in current dir and all subdirectories
 	go test ./...
@@ -22,15 +24,6 @@ check:
 
 get-deps:
 	go get -t ./...
-
-get-test-deps:
-	go get golang.org/x/tools/cmd/vet
-	go get -u golang.org/x/tools/cmd/cover
-	go get -u github.com/fzipp/gocyclo
-	go get -u github.com/barakmich/go-nyet
-	#go get -u github.com/golang/lint/golint
-	# go get github.com/opennota/check/cmd/defercheck
-	# go get github.com/opennota/check/cmd/varcheck
 
 cover:
 	go test -cover ./...
@@ -79,3 +72,16 @@ provision-public:
 # Provision development container
 provision-dev:
 	ansible-playbook -i deploy/inventory/ deploy/playbook_devserver.yml -v
+
+######################### Dockerised
+
+all: build up
+
+build:
+	docker-compose build
+
+up:
+	docker-compose up -d
+
+bash:
+	./docker-cmd.sh bash

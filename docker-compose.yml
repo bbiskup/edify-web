@@ -1,0 +1,15 @@
+# Image for development/testing
+dev:
+  build: .
+  volumes:
+    - .:/go/src/github.com/bbiskup/edify-web
+
+server:
+  build: .
+  ports:
+    - "18001:8001"
+  entrypoint:
+    - ./edify-web
+    - run
+    - -H
+    - 0.0.0.0

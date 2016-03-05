@@ -28,3 +28,4 @@ _testmain.go
 /.edify
 
 /deploy/inventory
+.bash_history
