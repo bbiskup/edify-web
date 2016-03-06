@@ -19,8 +19,7 @@ dev    |travis-dev|
 Running the server
 ==================
  
-  There is a `Demo server <http://ec2-54-194-191-17.eu-west-1.compute.amazonaws.com:18001/
->`_.
+  There is a `Demo server <http://ec2-54-194-191-17.eu-west-1.compute.amazonaws.com:18001/>`_.
   
   docker run --restart=always -p 18001:8001 --name edifyweb bbiskup/edifyweb_dev ."/edify-web run -H 0.0.0.0"
 
