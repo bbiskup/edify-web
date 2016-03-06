@@ -6,24 +6,6 @@ install:
   - sudo apt-get update -y
   - sudo apt-get install -y curl bison make
 
-script:
-  - go clean
-  - echo $GOPATH
-  - (cd $GOPATH/src/github.com/bbiskup && git clone https://github.com/bbiskup/edify.git)
-  - # Bleeding edge
-  - (cd $GOPATH/src/github.com/bbiskup/edify && git checkout dev && go get ./... && go install)
-  - make get-deps
-  - make get-test-deps
-  - make get-edifact-specs
-  - go vet
-  - go build
-  - make check
-
-  - ./edify-web run &
-  - sleep 5  # Allow for initialization
-  - curl -X POST --data-urlencode "message@testdata/messages/INVOIC_1.txt" http://localhost:8001/
-  - curl "http://localhost:8001/specsearch/?searchterm=invoic&specversion=one"
-
 
 ############### Dockerised
 
@@ -37,7 +19,6 @@ before_script:
 script:
   - ./docker-cmd.sh ./scripts/run-checks.sh
   - sleep 5 # Allow for initialization
-  - make test-curl-1
 
 after_success:
   # docker-compose strips underscores and dashes from directory name,
