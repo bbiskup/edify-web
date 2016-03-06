@@ -4,7 +4,7 @@ MAINTAINER bernhard.biskup@gmx.de
 
 WORKDIR /
 RUN wget -q https://nodejs.org/dist/v5.7.1/node-v5.7.1-linux-x64.tar.gz
-RUN tar xzvf node-v5.7.1-linux-x64.tar.gz
+RUN tar xzf node-v5.7.1-linux-x64.tar.gz
 RUN rm node-v5.7.1-linux-x64.tar.gz
 ENV PATH=/node-v5.7.1-linux-x64/bin/:$PATH
 RUN npm install -g bower
