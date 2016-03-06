@@ -1,11 +1,5 @@
 language: go
-go:
-    - 1.2
-    - 1.3
-    - 1.4
-    - tip
-cache:
-  #- apt: true
+sudo: required
 
 install:
   - sudo apt-get update -y
@@ -23,12 +17,31 @@ script:
   - go vet
   - go build
   - make check
-  - make test-multi-cpu
 
-  - # avoid excessive output
-  - make bench 2> bench.log
-  - make cover
   - ./edify-web run &
   - sleep 5  # Allow for initialization
+  - curl -X POST --data-urlencode "message@testdata/messages/INVOIC_1.txt" http://localhost:8001/
+  - curl "http://localhost:8001/specsearch/?searchterm=invoic&specversion=one"
+
+
+############### Dockerised
+
+before_script:
+  - mount > build_debug.log
+  - echo $TRAVIS_BUILD_DIR >> build_debug.log
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker pull bbiskup/edify_web_dev:latest || true
+  - make
+
+script:
+  - ./docker-cmd.sh ./scripts/run-checks.sh
+  - sleep 5 # Allow for initialization
   - make test-curl-1
 
+after_success:
+  # docker-compose strips underscores and dashes from directory name,
+  # hence edify-web / service "dev" --> image edifyweb_dev
+  - docker tag -f edifyweb_dev bbiskup/edifyweb_dev:latest
+  - docker tag edifyweb_dev bbiskup/edifyweb_dev:$TRAVIS_BUILD_NUMBER
+  - docker push bbiskup/edifyweb_dev:latest
+  - docker push bbiskup/edifyweb_dev:$TRAVIS_BUILD_NUMBER
