@@ -24,3 +24,8 @@ The following environment variables need to be set to pull/push from/to Docker H
 - ``DOCKER_USERNAME``
 - ``DOCKER_PASSWORD``
 - ``DOCKER_EMAIL``
+
+Run server in container
+=======================
+
+  docker run --restart=always -p 18001:8001 --name edifyweb edifyweb_dev ."/edify-web run -H 0.0.0.0"
