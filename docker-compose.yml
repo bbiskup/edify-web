@@ -7,6 +7,8 @@ dev:
     - ./main.go:/go/src/github.com/bbiskup/edify-web/main.go
     - ./static:/go/src/github.com/bbiskup/edify-web/static
     - ./scripts:/go/src/github.com/bbiskup/edify-web/scripts
+  ports:
+    - "18002:8001"
 
 server:
   build: .
