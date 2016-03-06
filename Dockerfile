@@ -18,13 +18,15 @@ WORKDIR /go/src/github.com/bbiskup/edify-web
 # Install edify
 RUN go get github.com/bbiskup/edify
 
-# Get EDIFACT specifications
-RUN edify download_specs
-RUN edify extract_specs
 
 COPY . /go/src/github.com/bbiskup/edify-web
 RUN bower install
 WORKDIR /go/src/github.com/bbiskup/edify-web
+
+# Get EDIFACT specifications
+RUN edify download_specs
+RUN edify extract_specs
+
 ADD scripts scripts
 RUN ./scripts/get_test_deps.sh
 RUN go get -t ./...
