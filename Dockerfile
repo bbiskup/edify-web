@@ -18,16 +18,21 @@ WORKDIR /go/src/github.com/bbiskup/edify-web
 # Install edify
 RUN go get github.com/bbiskup/edify
 
-
-COPY . /go/src/github.com/bbiskup/edify-web
+# COPY . /go/src/github.com/bbiskup/edify-web
+ADD bower.json bower.json
 RUN bower install
-WORKDIR /go/src/github.com/bbiskup/edify-web
+
+ADD ./main.go main.go
+ADD ./handlers handlers
+ADD ./defs defs
+ADD static static
+ADD scripts scripts
 
 # Get EDIFACT specifications
 RUN edify download_specs
 RUN edify extract_specs
+RUN ls -la
 
-ADD scripts scripts
 RUN ./scripts/get_test_deps.sh
 RUN go get -t ./...
 RUN go build -v
