@@ -36,3 +36,14 @@ The following environment variables need to be set to pull/push from/to Docker H
 - ``DOCKER_USERNAME``
 - ``DOCKER_PASSWORD``
 - ``DOCKER_EMAIL``
+
+Deployment
+++++++++++
+
+Activate ``docker-machine`` target environment::
+
+    eval $(docker-machine env awsnano1)
+
+Pull and run Docker image::
+    
+    make demo-deploy
