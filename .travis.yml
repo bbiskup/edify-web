@@ -18,16 +18,18 @@ after_success:
 - docker tag edifyweb_dev bbiskup/edifyweb_dev:$TRAVIS_BUILD_NUMBER
 - docker push bbiskup/edifyweb_dev:latest
 - docker push bbiskup/edifyweb_dev:$TRAVIS_BUILD_NUMBER
-deploy:
-  matrix:
-  - provider: codedeploy
-    access_key_id: AKIAJNTGDD5TMZOFCA3A
-    secret_access_key: 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
-    bucket: S3 Bucket
-    key: latest/edify_web.zip
-    application: edify_web
-    deployment_group: DemoDeploymentGroup
-    on:
-      branch: demo
-  secret_access_key:
-    secure: U0ne8S5fm5TeDUtHqmjICXuHAc5jobdOVUTXhN+zBvkuR0lBZ1lSK4U6Mtd70uFQJb10jcA3fZaCaLucg2HvTOWmWc2VCDFAQwpwVbxZ+SSOtq9MU9LqCGueTpOzZCB3quF6omdq6+Ns2foV7pT/4jOiM68qd1NHSG4aavVJLnAhFT47rJc7b8TBPhj7UTe1yHCAUYBm1R4ytQBNjR9iu/6Lku1IcQ1zm7v6lc3A1Fi4Fptjb5bEgIeBgq9fIGdRaDUMlsZAklk5Z3gdmd4FdbNZd7cB+QVY1ScYbFMUnxiXyyPDXI6TuFgYJ4K06EMVHULLHYm/v10ZQ9Rd+dKG8znowf7myanA51gUFNeeiW1o4yf+XoYzc8P8v44PA9BXmuFztsrIinVz0iZ7pQl5zUpfU/lei0OdVnD+eyeHXxoFn57izbufExJ0pPX2ZKxug/BZewylFQ3MiYMnk4iWK8D5I0Nyd0O8xG9aBeO/GHbXc83LhJsV5MQ/a6Tqzwz+1hC8yGAuK8WZd1aXbKuHQMZ8Ov5NadQbg0pyEo2izdgcIzMOlQOx7SbGhLnOsnW4NjAzSkvVVR+jHz1lal05pSy/KzAqgHgXuh78gZuoJ1ANVvY+abln7mhE7PPAEHjS2y2X8du2Hf66HqL6qen7Oy0ahyxbO/HqjIH3z+jf40U=
+
+# deploy:
+#   matrix:
+#   - provider: codedeploy
+#     access_key_id: AKIAJNTGDD5TMZOFCA3A
+#     secret_access_key: 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
+#     bucket: S3 Bucket
+#     key: latest/edify_web.zip
+#     application: edify_web
+#     deployment_group: DemoDeploymentGroup
+#     region: eu-west-1
+#     on:
+#       branch: demo
+#   secret_access_key:
+#     secure: U0ne8S5fm5TeDUtHqmjICXuHAc5jobdOVUTXhN+zBvkuR0lBZ1lSK4U6Mtd70uFQJb10jcA3fZaCaLucg2HvTOWmWc2VCDFAQwpwVbxZ+SSOtq9MU9LqCGueTpOzZCB3quF6omdq6+Ns2foV7pT/4jOiM68qd1NHSG4aavVJLnAhFT47rJc7b8TBPhj7UTe1yHCAUYBm1R4ytQBNjR9iu/6Lku1IcQ1zm7v6lc3A1Fi4Fptjb5bEgIeBgq9fIGdRaDUMlsZAklk5Z3gdmd4FdbNZd7cB+QVY1ScYbFMUnxiXyyPDXI6TuFgYJ4K06EMVHULLHYm/v10ZQ9Rd+dKG8znowf7myanA51gUFNeeiW1o4yf+XoYzc8P8v44PA9BXmuFztsrIinVz0iZ7pQl5zUpfU/lei0OdVnD+eyeHXxoFn57izbufExJ0pPX2ZKxug/BZewylFQ3MiYMnk4iWK8D5I0Nyd0O8xG9aBeO/GHbXc83LhJsV5MQ/a6Tqzwz+1hC8yGAuK8WZd1aXbKuHQMZ8Ov5NadQbg0pyEo2izdgcIzMOlQOx7SbGhLnOsnW4NjAzSkvVVR+jHz1lal05pSy/KzAqgHgXuh78gZuoJ1ANVvY+abln7mhE7PPAEHjS2y2X8du2Hf66HqL6qen7Oy0ahyxbO/HqjIH3z+jf40U=
