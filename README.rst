@@ -23,7 +23,7 @@ Running the server
   
   To run the container, install `docker <https://www.docker.com/>`_, then::
   
-    docker run --restart=always -p 18001:8001 --name edifyweb bbiskup/edifyweb_dev ."/edify-web run -H 0.0.0.0"
+    docker run --restart=always -p 18001:8001 --name edifyweb bbiskup/edifyweb_dev "./edify-web run -H 0.0.0.0"
 
 Development
 ===========
