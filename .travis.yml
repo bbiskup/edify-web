@@ -14,7 +14,8 @@ before_script:
   - echo $TRAVIS_BUILD_DIR >> build_debug.log
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker pull bbiskup/edify_web_dev:latest || true
-  - make
+  - docker-compose build
+  - docker-compose up -d
 
 script:
   - ./docker-cmd.sh ./scripts/run-checks.sh
