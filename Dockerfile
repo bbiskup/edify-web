@@ -31,9 +31,6 @@ ADD scripts scripts
 # Get EDIFACT specifications
 RUN edify download_specs
 RUN edify extract_specs
-RUN ls -la
-RUN pwd
-RUN ls -lR .edify
 
 RUN ./scripts/get_test_deps.sh
 RUN go get -t ./...
