@@ -2,7 +2,11 @@
 dev:
   build: .
   volumes:
-    - .:/go/src/github.com/bbiskup/edify-web
+    - ./handlers:/go/src/github.com/bbiskup/edify-web/handlers
+    - ./defs:/go/src/github.com/bbiskup/edify-web/defs
+    - ./main.go:/go/src/github.com/bbiskup/edify-web/main.go
+    - ./static:/go/src/github.com/bbiskup/edify-web/static
+    - ./scripts:/go/src/github.com/bbiskup/edify-web/scripts
 
 server:
   build: .
