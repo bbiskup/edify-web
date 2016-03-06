@@ -66,3 +66,20 @@ nyet:
 clean:
 	./docker-cmd.sh go clean ./...
 	git clean -f -d
+
+# ------------------- Demo  --------------------------
+
+# These commands require a host "awsnano1" configured with docker-machine
+# and activated with eval $(docker-machine env awsnano1)
+
+demo-deploy: demo-remove
+	docker run --restart=always -p 18001:8001 --name edifyweb bbiskup/edifyweb_dev "./edify-web run -H 0.0.0.0"
+
+demo-remove:
+	docker stop edifyweb || true;
+	docker rm edifyweb || true;
+
+demo-docker-ps:
+	docker ps
+
+demo-update: demo-remove demo-deploy
