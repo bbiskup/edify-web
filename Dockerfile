@@ -36,5 +36,4 @@ RUN ./scripts/get_test_deps.sh
 RUN go get -t ./...
 RUN go build -v
 
-EXPOSE 8001
 ENTRYPOINT ["/bin/bash", "-c"]
