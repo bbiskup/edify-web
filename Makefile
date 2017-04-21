@@ -55,13 +55,14 @@ cover:
 # Show package coverage in web browser
 # go tool cover -html=coverage.out
 
-quality: mccabe nyet 
+quality: mccabe
 
 mccabe:
 	./docker-cmd.sh gocyclo -over 9 .
 
-nyet:
-	./docker-cmd.sh go-nyet ./...
+# Disabled for now (types package missing)
+# nyet:
+#	./docker-cmd.sh go-nyet ./...
 
 clean:
 	./docker-cmd.sh go clean ./...
