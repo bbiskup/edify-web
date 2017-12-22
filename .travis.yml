@@ -7,7 +7,7 @@ install:
 before_script:
 - mount > build_debug.log
 - echo $TRAVIS_BUILD_DIR >> build_debug.log
-- docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - docker pull bbiskup/edify_web_dev:latest || true
 - make
 script:
