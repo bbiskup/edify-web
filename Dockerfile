@@ -1,4 +1,4 @@
-FROM golang:1.6
+FROM golang:1.11
 MAINTAINER bernhard.biskup@gmx.de
 
 
